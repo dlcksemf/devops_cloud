@@ -23,16 +23,22 @@ def start(update, context):
 def echo(update, context):
     received_text: str = update.message.text
 
-    if tasks.ya.check_available(received_text):
-        response_text = tasks.ya.make_response(received_text)
-    elif tasks.naver_search.check_available(received_text):
-        response_text = tasks.naver_search.make_response(received_text)
-    elif tasks.chooser.check_available(received_text):
-        response_text = tasks.chooser.make_response(received_text)
-    elif tasks.lucky_color.check_available(received_text):
-        response_text = tasks.lucky_color.make_response()
-    elif tasks.date_left_in_year.check_available(received_text):
-        response_text = tasks.date_left_in_year.make_response()
+    supported_tasks = [
+        tasks.get_current_lotto_numbers,
+        tasks.ya,
+        tasks.naver_search,
+        tasks.predict_lotto_numbers,
+        tasks.numbers_add,
+        tasks.reverse_string,
+        tasks.date_left_in_year,
+        tasks.lucky_color,
+        tasks.chooser,
+    ]
+
+    for task in supported_tasks:
+        if task.check_available(received_text):
+            response_text = task.make_response(received_text)
+            break
     else:
         response_text = "지원하지 않는 명령입니다."
 
@@ -49,6 +55,8 @@ echo_handler = MessageHandler(
 )
 
 dispatcher.add_handler(echo_handler)
+
+print("Started bot ...")
 
 updater.start_polling()
 updater.idle()
