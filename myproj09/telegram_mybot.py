@@ -51,6 +51,7 @@ echo_handler = MessageHandler(
 dispatcher.add_handler(echo_handler)
 
 updater.start_polling()
+updater.idle()
 
 
 # bot = telegram.Bot(token)

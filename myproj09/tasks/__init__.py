@@ -3,3 +3,4 @@ from . import ya
 from . import chooser
 from . import lucky_color
 from . import date_left_in_year
+from . import reverse_string
