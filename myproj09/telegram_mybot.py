@@ -6,19 +6,20 @@ import tasks
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 if TELEGRAM_TOKEN is None:
     print("TELEGRAM_TOKEN 환경변수를 지정해주세요.", file=sys.stderr)
-    sys.exit(1) # 종료 상탯값을 1로 지정하고, 프로그램 종료
+    sys.exit(1)  # 종료 상탯값을 1로 지정하고, 프로그램 종료
 
 updater = Updater(token=TELEGRAM_TOKEN, use_context=True)
 dispatcher = updater.dispatcher
+
 
 def start(update, context):
     """
     대화방이 처음 열리면, 자동으로 호출되는 함수
     """
     context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text="안녕 나는 dlcksemf_bot이야. 만나서 반가워."
+        chat_id=update.effective_chat.id, text="안녕 나는 dlcksemf_bot이야. 만나서 반가워."
     )
+
 
 def echo(update, context):
     received_text: str = update.message.text
@@ -42,9 +43,8 @@ def echo(update, context):
     else:
         response_text = "지원하지 않는 명령입니다."
 
-    context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=response_text)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=response_text)
+
 
 start_handler = CommandHandler("start", start)
 dispatcher.add_handler(start_handler)
@@ -69,4 +69,3 @@ updater.idle()
 # # pprint.pprint(resp)
 # chat_id = 2124512764
 # bot.sendMessage(chat_id=chat_id, text="안녕 나는 봇이야")
-
