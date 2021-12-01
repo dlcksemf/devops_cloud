@@ -1,0 +1,20 @@
+{% extends "moviereview/layout.html" %}
+
+{% block content %}
+
+    <form action="" method="get">
+        <input type="text" name="q" values="{{ request.GET.q }}"/>
+        <input type="submit" values="검색"/>
+    </form>
+
+    <ul>
+        {% for post in movie_list %}
+            <li>
+                <a href="/moviereview/{{ post.pk }}/">
+                    {{ post.title }}
+                </a>
+            </li>
+        {% endfor %}
+
+    </ul>
+{% endblock %}
