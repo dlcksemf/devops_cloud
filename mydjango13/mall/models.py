@@ -12,4 +12,7 @@ class Shop(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
+    class Meta:
+        # 관련 쿼리셋에서 order_by를 지정하지 않을 때
+        # 적용될 디폴트 정렬
+        ordering = ['-id']
