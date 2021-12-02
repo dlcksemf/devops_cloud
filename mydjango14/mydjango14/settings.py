@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third apps
     # local apps
+    'catube',
 ]
 
 if DEBUG:
