@@ -23,7 +23,7 @@ from movies.views import index, movies_review
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("movies/", index),
-    path("movies/<int:pk>", movies_review),
+    path("movies/<int:pk>/", movies_review),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
