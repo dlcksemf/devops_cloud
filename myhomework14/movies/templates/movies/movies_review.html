@@ -1,0 +1,20 @@
+{% extends "movies/layout.html" %}
+
+{% block content %}
+
+    <h2>{{ movies.title }}</h2>
+    <hr/>
+
+    <img src="{{ movies.poster_file.url }}" alt="{{ movies.title }}">
+    {{ movies.comments|linebreaks }}
+    <hr/>
+
+    {{ movies.created_at }}
+
+    <p/>
+    <a href="/movies/">목록으로</a>
+
+{% endblock %}
+
+
+

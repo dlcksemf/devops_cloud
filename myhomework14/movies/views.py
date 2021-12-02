@@ -13,3 +13,14 @@ def index(request: HttpRequest) -> HttpResponse:
             "movies_list": qs,
         },
     )
+
+
+def movies_review(request: HttpRequest, pk: int) -> HttpResponse:
+    movie = Movies.objects.get(pk=pk)
+    return render(
+        request,
+        "movies/movies_review.html",
+        {
+            "movies": movie,
+        },
+    )
