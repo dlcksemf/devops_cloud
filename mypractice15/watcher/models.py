@@ -11,7 +11,7 @@ class Movie(models.Model):
     poster_file = models.ImageField()
     poster_thumb = ImageSpecField(
         source="poster_file",
-        processors=[ResizeToFill(400, 800)],
+        processors=[ResizeToFill(200, 400)],
         format="JPEG",
         options={"quality": 60},
     )
