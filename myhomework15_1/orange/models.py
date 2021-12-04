@@ -1,4 +1,6 @@
 from django.db import models
+from imagekit.models import ImageSpecField
+from pilkit.processors import ResizeToFill
 
 
 class Music(models.Model):
@@ -6,10 +8,16 @@ class Music(models.Model):
     artist = models.CharField(max_length=30)
     album = models.CharField(max_length=30)
     genre = models.CharField(max_length=20)
-    released_date = models.DateTimeField()
+    released_date = models.DateField()
     description = models.TextField()
     album_cover = models.ImageField(null=True)
-    korean_music = models.BooleanField(null=True)
+    album_cover_thumb = ImageSpecField(
+        source="album_cover",
+        processors=[ResizeToFill(800, 400)],
+        format="JPEG",
+        options={"quality": 60},
+    )
+    korean_music = models.BooleanField(default=True)
 
 
 
