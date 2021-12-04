@@ -1,0 +1,12 @@
+{% extends "watcher/layout.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col" >
+            <img src="{{ movie.poster_thumb.url }}" alt="{{ movies.title }}">
+        </div>
+        <div class="col-9">
+            {{ movie.comment|linebreaks }}
+        </div>
+    </div>
+{% endblock %}

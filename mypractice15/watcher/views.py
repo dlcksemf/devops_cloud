@@ -14,5 +14,7 @@ def movie_list(request: HttpRequest) -> HttpResponse:
     return render(request, "watcher/movie_list.html", context)
 
 
-def movie_detail(request: HttpRequest) -> HttpResponse:
-    return render(request, "watcher/movie_detail.html", {})
+def movie_detail(request: HttpRequest, pk:int) -> HttpResponse:
+    movie = Movie.objects.get(pk=pk)
+    context = {"movie": movie,}
+    return render(request, "watcher/movie_detail.html", context )

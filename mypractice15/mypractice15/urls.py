@@ -18,11 +18,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from watcher.views import movie_list
+from watcher.views import movie_list, movie_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('watcher/', movie_list),
+    path('watcher/<int:pk>/', movie_detail),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
