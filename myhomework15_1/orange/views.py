@@ -5,6 +5,11 @@ from orange.models import Music
 
 def index(request: HttpRequest) -> HttpResponse:
     qs = Music.objects.all()
+
+    query = request.GET.get("query", "")
+    if query:
+        qs = qs.filter(title__icontains=query)
+
     context = {
         "music_list": qs,
     }

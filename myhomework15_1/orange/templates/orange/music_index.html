@@ -1,6 +1,12 @@
 {% extends "orange/layout.html" %}
 
 {% block content %}
+
+    <form action="" method="get">
+        <input type="text" name="query" value="{{ request.GET.query }}" />
+        <input type="submit" value="검색" />
+    </form>
+
     <div class="row">
         {% for music in music_list %}
             <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 my-3">
