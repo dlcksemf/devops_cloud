@@ -2,9 +2,20 @@
 
 {% block content %}
 
+    <header class="py-3 mb-4 border-bottom">
+        <div class="container d-flex flex-wrap justify-content-center">
+            <a href="/orange/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                    <span class="fs-4">Orange</span>
+            </a>
+        </div>
+    </header>
+
 
     <h3>
-        Title : {{ music.title }}  / Artist : {{ music.artist }} / Genre : {{ music.genre }}
+        Title : {{ music.title }} / Artist : {{ music.artist }} / Genre : {{ music.genre }}
     </h3>
     <hr/>
     <div class="row">
@@ -15,7 +26,7 @@
             {{ music.description|linebreaks }}
         </div>
     </div>
-    <hr />
+    <hr/>
     {{ music.released_date }}
 
 {% endblock %}

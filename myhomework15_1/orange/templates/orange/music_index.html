@@ -2,10 +2,22 @@
 
 {% block content %}
 
-    <form action="" method="get">
-        <input type="text" name="query" value="{{ request.GET.query }}" />
-        <input type="submit" value="검색" />
-    </form>
+    <header class="py-3 mb-4 border-bottom">
+        <div class="container d-flex flex-wrap justify-content-center">
+            <a href="/orange/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                <span class="fs-4">Orange</span>
+            </a>
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0">
+                <form action="" method="get">
+                    <input type="text" name="query" value="{{ request.GET.query }}"/>
+                    <input type="submit" value="검색"/>
+                </form>
+            </form>
+        </div>
+    </header>
 
     <div class="row">
         {% for music in music_list %}
