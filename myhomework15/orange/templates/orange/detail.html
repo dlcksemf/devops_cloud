@@ -1,0 +1,29 @@
+{% extends 'orange/layout.html' %}
+
+{% block content %}
+
+    <div class="row">
+
+        <h3>
+            Title: {{ music.title }} / Artist : {{ music.artist }} / Genre : {{ music.genre }}
+        </h3>
+
+        <hr/>
+
+        <div class="row">
+            <div class="col-4">
+                <img src="{{ music.album_cover_file_thumb.url }}" alt="{{ music.title }}"/>
+            </div>
+            <div class="col">
+                {{ music.description|linebreaks }}
+            </div>
+
+
+        </div>
+    </div>
+    <hr/>
+    {{ music.released_date }}
+
+
+
+{% endblock %}
