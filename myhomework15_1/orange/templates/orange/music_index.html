@@ -1,0 +1,23 @@
+{% extends "orange/layout.html" %}
+
+{% block content %}
+    <div class="row">
+        {% for music in music_list %}
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 my-3">
+                <div class="card">
+                    <a href="/orange/{{ music.pk }}">
+                        <image src="{{ music.album_cover_thumb.url }}" alt="{{ music.title }}" class="card-img-top"/>
+                    </a>
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            {{ music.title }}
+                            <hr/>
+                            {{ music.artist }}
+                        </h6>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
