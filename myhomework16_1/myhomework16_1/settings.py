@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third apps
+    'imagekit',
     # local apps
+    'melon',
 ]
 
 if DEBUG:
