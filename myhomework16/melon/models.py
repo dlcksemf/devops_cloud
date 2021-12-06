@@ -4,7 +4,7 @@ from pilkit.processors import ResizeToFill
 
 
 class Music(models.Model):
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=30,db_index=True)
     artist = models.CharField(max_length=30)
     album = models.CharField(max_length=30)
     genre = models.CharField(max_length=30)
