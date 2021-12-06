@@ -13,7 +13,7 @@ class Music(models.Model):
     album_cover_file = models.ImageField(null=True)
     album_cover_file_thumb = ImageSpecField(
         source="album_cover_file",
-        processors=[ResizeToFill(800, 400)],
+        processors=[ResizeToFill(400, 400)],
         format="JPEG",
         options={"quality": 60},
     )
