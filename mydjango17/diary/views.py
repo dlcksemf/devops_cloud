@@ -25,6 +25,8 @@ def post_detail(request:HttpRequest, pk: int) -> HttpResponse:
     return render(request, "diary/post_detail.html", context)
 
 
-def tag(request:HttpRequest) -> HttpResponse:
-    context = {}
-    return render(request, "diary/tag_list.html", context)
+def tag_detail(request:HttpRequest, tag_name:str ) -> HttpResponse:
+    qs = Post.objects.all()
+    qs = qs.filter(tag_set__name=tag_name)
+    context = {"post_list": qs}
+    return render(request, "diary/tag_detail.html", context)
