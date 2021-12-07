@@ -26,6 +26,9 @@ class Music(TimeStamped):
     description = models.TextField()
     tag_set = models.ManyToManyField('Tag', blank=True)
 
+    def __str__(self):
+        return self.title
+
 
 class Comment(TimeStamped):
     music = models.ForeignKey(Music, on_delete=models.CASCADE)
@@ -34,5 +37,8 @@ class Comment(TimeStamped):
 
 class Tag(TimeStamped):
     name = models.CharField(max_length=20)
+
+    def __str__(self) -> str:
+        return self.name
 
 
