@@ -23,7 +23,9 @@ class Post(TimestampedModel):
         verbose_name = "포스팅"
         verbose_name_plural = "포스팅 목록"
 
+
 class Comment(TimestampedModel):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author_name = models.CharField(max_length=20)
     message = models.TextField()
 
