@@ -25,7 +25,10 @@ class Post(TimestampedModel):
 
 
 class Comment(TimestampedModel):
+    # 외래키 : 정수값 -> 장고에서 자동으로 해준다아
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    # post_id 필드를 자동으로 생성 해준다!
+
     author_name = models.CharField(max_length=20)
     message = models.TextField()
 
