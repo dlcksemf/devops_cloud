@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.urls import path, include
 
 def root(request):
-    return redirect("diary:post_list")
+    return redirect("music:music_list")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
