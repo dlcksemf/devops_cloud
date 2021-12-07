@@ -1,5 +1,8 @@
-from . import views
+from django.urls import path
+from diary.views import post_list
 
 app_name = "diary"
 
-urlpatterns = []
+urlpatterns = [
+    path('', post_list, name="post_list"),
+]
