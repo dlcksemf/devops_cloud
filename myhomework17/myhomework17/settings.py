@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third apps
     # local apps
+    'music',
 ]
 
 if DEBUG:
@@ -58,7 +59,7 @@ MIDDLEWARE = [
 ]
 
 if DEBUG:
-    MIDDLEWARE = [debug_toolbar.middleware.DebugToolbarMiddleware] + MIDDLEWARE
+    MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
 
 ROOT_URLCONF = 'myhomework17.urls'
 
