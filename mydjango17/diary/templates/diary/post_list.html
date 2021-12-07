@@ -4,17 +4,31 @@
 {% block content %}
 
     <form action="" method="get">
-        <input type="text" name="query" value="{{ request.GET.query }}" />
-        <input type="submit" value="검색" />
+        <input type="text"
+               name="query"
+               value="{{ request.GET.query }}"
+               placeholder="검색어를 입력해주세요."/>
+        <input type="submit" value="검색"/>
 
     </form>
 
-<ul>
-    {% for post in post_list %}
-        <a href="{% url "diary:post_detail" post.pk %}">
-            <li>{{ post.title }}</li>
-        </a>
-    {% endfor %}
-</ul>
+    <div class="row" style="margin-top: 1em;">
+        {% for post in post_list %}
+            <div class="col-sm-6 offset-sm-3" style="margin-bottom: 1em;">
+                <div class="card">
+                    <img src="{{ post.photo.url }}"
+                         alt="{{ post.title }}"
+                         class="card-img-top"/>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        {{ post.content|truncatewords:20 }}
+                        <a href="{% url "diary:post_detail" post.pk %}" class="btn btn-sm btn-primary">
+                            바로 가기
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
