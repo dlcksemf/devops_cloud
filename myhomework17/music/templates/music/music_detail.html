@@ -1,0 +1,28 @@
+{% extends 'music/layout.html' %}
+
+{% block content %}
+
+    <h2>{{ music.title }}</h2>
+
+    <p>
+        태그 :
+        {% for tag in tag_list %}
+            <a href="{% url "music:tag_detail" tag.name %}" class="badge bg-success">{{ tag.name }}</a>
+        {% endfor %}
+    </p>
+
+    <img src="{{ music.album_cover_file_thumb.url }}" alt="{{ music.title }}">
+
+    {{ music.description|linebreaks }}
+
+    <hr/>
+    <h3>댓글</h3>
+    <ul>
+        {% for comment in comment_list %}
+            <li>
+                {{ comment.content }}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

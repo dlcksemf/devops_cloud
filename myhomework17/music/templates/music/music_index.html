@@ -1,0 +1,25 @@
+{% extends 'music/layout.html' %}
+
+{% block content %}
+
+    <div class="row">
+        {% for music in music_list %}
+            <div class="col-sm-3 my-3">
+                <div class="card">
+                    <img src="{{ music.album_cover_file_thumb.url }}" alt="{{ music.title }}" class="card-img-top" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{ music.title }}</h5>
+                        {{ music.description|truncatewords:20 }}
+                        <a href="{% url "music:music_detail" music.pk %}" class="btn btn-sm btn-primary">
+                            바로가기
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

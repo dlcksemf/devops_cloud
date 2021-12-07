@@ -1,0 +1,19 @@
+{% extends 'music/layout.html' %}
+
+{% block content %}
+
+    <h2>{{ tag_name }}</h2>
+
+    <div>
+        <ul>
+            {% for music in music_list %}
+                <li>
+                    <a href="{% url "music:music_detail" music.pk %}">
+                        {{ music.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}
