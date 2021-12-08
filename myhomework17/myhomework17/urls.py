@@ -6,12 +6,12 @@ from django.urls import path, include
 
 
 def root(request):
-    return redirect("music:music_list")
+    return redirect("music:music_index")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('music/', include('music.urls')),
-    path('', root, name='root'),
+    path('', root, name="root"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
