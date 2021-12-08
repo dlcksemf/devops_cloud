@@ -6,6 +6,6 @@ app_name = "music"
 
 urlpatterns = [
     path("", music_list, name="music_list" ),
-    path("/<int:pk>", music_detail, name="music_detail" ),
+    path("<int:pk>", music_detail, name="music_detail" ),
     path("tag/<str:tag_name>", tag_detail, name="tag_detail"),
 ]

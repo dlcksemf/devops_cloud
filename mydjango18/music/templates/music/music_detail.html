@@ -3,21 +3,21 @@
 {% block content %}
     {% for tag in tag_list %}
         <p>
-            <a href="{% url "music:tag_detail" tag.name %}" class="btn btn-primary">{{ tag.name }}</a>
+            <a href="{% url "music:tag_detail" tag.name %}" class="badge bg-success">{{ tag.name }}</a>
         </p>
     {% endfor %}
     <img src="{{ music.album_cover_file_thumb.url }}" alt="{{ music.title }}">
 
     {{ music.description|linebreaks }}
 
+    <hr />
+
+    <h5>댓글</h5>
     <ul>
     {% for comment in comment_list %}
         <li>{{ comment.created_at }}: {{ comment.content }}</li>
     {% endfor %}
     </ul>
-
-    <hr/>
-    {{ music.released_date }}
 
 
 

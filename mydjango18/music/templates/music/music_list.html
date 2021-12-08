@@ -4,14 +4,13 @@
     <div class="row">
 
         {% for music in music_list %}
-            <div class="col-sm-3 my-3">
-                <div class="card">
-                    <img src="{{ music.album_cover_file_thumb.url }}" alt="{{ music.title }}" class="card-img-top">
+            <div class="col-sm-2 my-3">
+                <div class="card text-center h-100">
+                    <a href="{% url "music:music_detail" music.pk %}"><img src="{{ music.album_cover_file_thumb.url }}" alt="{{ music.title }}" class="card-img-top"></a>
                     <div class="card-body">
-                        <h5 class="card-title">{{ music.title }}</h5>
+                        <h6 class="card-title">{{ music.title }}</h6>
                         <hr/>
-                        {{ music.description|truncatewords:10 }}
-                        <a href="{% url "music:music_detail" music.pk %}" class="btn btn-sm btn-primary">자세히 보기</a>
+                        {{ music.description|truncatechars:50 }}
                     </div>
                 </div>
             </div>

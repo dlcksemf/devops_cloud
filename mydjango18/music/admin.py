@@ -4,7 +4,7 @@ from music.models import Music, Comment, Tag
 
 @admin.register(Music)
 class MusicAdmin(admin.ModelAdmin):
-    list_display = ["title"]
+    list_display = ["title", "album_cover_file"]
 
 
 @admin.register(Comment)
