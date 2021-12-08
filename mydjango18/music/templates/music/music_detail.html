@@ -1,5 +1,24 @@
 {% extends "music/layout.html" %}
 
 {% block content %}
+    {% for tag in tag_list %}
+        <p>
+            <a href="{% url "music:tag_detail" tag.name %}" class="btn-primary">{{ tag_name }}</a>
+        </p>
+    {% endfor %}
+    <img src="{{ music.album_cover_file_thumb.url }}" alt="{{ music.title }}">
+
+    {{ music.description|linebreaks }}
+
+    <ul>
+    {% for comment in comment_list %}
+        <li>{{ comment.created_at }}: {{ comment.content }}</li>
+    {% endfor %}
+    </ul>
+
+    <hr/>
+    {{ music.released_date }}
+
+
 
 {% endblock %}
