@@ -2,4 +2,14 @@
 
 {% block content %}
 
+    {{ tag_name }}
+
+    <ul>
+    {% for music in music_list %}
+    <li>
+        <a href="{% url "music:music_detail" music.pk %}">{{ music.title }}</a>
+    </li>
+    {% endfor %}
+    </ul>
+
 {% endblock %}

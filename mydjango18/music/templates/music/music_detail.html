@@ -3,7 +3,7 @@
 {% block content %}
     {% for tag in tag_list %}
         <p>
-            <a href="{% url "music:tag_detail" tag.name %}" class="btn-primary">{{ tag_name }}</a>
+            <a href="{% url "music:tag_detail" tag.name %}" class="btn btn-primary">{{ tag.name }}</a>
         </p>
     {% endfor %}
     <img src="{{ music.album_cover_file_thumb.url }}" alt="{{ music.title }}">
