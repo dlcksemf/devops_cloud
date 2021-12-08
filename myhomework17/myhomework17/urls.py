@@ -6,7 +6,7 @@ from django.urls import path, include
 
 
 def root(request):
-    return redirect("music:music_list")
+    return redirect("music:music_index")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
