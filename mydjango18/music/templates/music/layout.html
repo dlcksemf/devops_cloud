@@ -24,7 +24,10 @@
                 <span class="fs-4">Music</span>
             </a>
             <form class="col-12 col-lg-auto mb-3 mb-lg-0">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                <form action="" method="get">
+                    <input type="text" name="query" value="{{ request.GET.query }}">
+                    <input type="submit" value="검색">
+                </form>
             </form>
         </div>
     </header>

@@ -5,6 +5,11 @@ from music.models import Music, Comment, Tag
 
 def music_list(request:HttpRequest) -> HttpResponse:
     qs = Music.objects.all()
+
+    query = request.GET.get("query", "")
+    if query:
+        qs = qs.filter(title__icontains=query)
+
     context = {"music_list": qs,}
     return render(request, "music/music_list.html", context)
 
