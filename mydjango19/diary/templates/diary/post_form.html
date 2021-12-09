@@ -3,7 +3,12 @@
 {% block content %}
 
     <h2>Post Form</h2>
-
-    {{ form.as_table }}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="저장하기">
+    </form>
 
 {% endblock %}
