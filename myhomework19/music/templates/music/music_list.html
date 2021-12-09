@@ -2,6 +2,8 @@
 
 {% block content %}
 
+    <a href="{% url "music:music_new" %}" class="btn btn-primary">추가하기</a>
+
     <div class="row">
         {% for music in music_list %}
             <div class="col-sm-3 my-3">

@@ -1,3 +1,4 @@
+from django.core.validators import MinLengthValidator
 from django.db import models
 from imagekit.models import ImageSpecField
 from pilkit.processors import ResizeToFill
@@ -23,7 +24,11 @@ class Music(TimeStamped):
         options={"quality": 60},
     )
     released_date = models.DateField()
-    description = models.TextField()
+    description = models.TextField(
+        validators=[
+            MinLengthValidator(3),
+        ],
+    )
     tag_set = models.ManyToManyField('Tag', blank=True)
 
     def __str__(self):

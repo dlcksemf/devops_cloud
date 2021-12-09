@@ -16,6 +16,8 @@
 
     {{ music.description|linebreaks }}
 
+    {{ music.released_date }}
+
     <h3>댓글</h3>
 
     <ul>
@@ -29,7 +31,10 @@
 
     <hr />
 
-    <a href="{% url "music:music_list" %}">
+    <a href="{% url "music:music_list" %}" class="btn btn-primary">
         목록으로
+    </a>
+    <a href="{% url "music:music_edit" music.pk %}" class="btn btn-primary">
+        수정하기
     </a>
 {% endblock %}

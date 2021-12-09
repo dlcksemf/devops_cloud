@@ -1,5 +1,7 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from music.forms import MusicForm
 from music.models import Music, Comment, Tag
 
 
@@ -29,3 +31,31 @@ def tag_detail(request: HttpRequest, tag_name:str) -> HttpResponse:
     context = {"tag_name": tag_name,
                "music_list": qs}
     return render(request, "music/tag_detail.html", context)
+
+
+def music_new(request: HttpRequest) -> HttpResponse:
+
+    if request.method == "POST":
+        form = MusicForm(request.POST, request.FILES)
+        if form.is_valid():
+            music = form.save(commit=False)
+            music.released_date = "2002-03-25"
+            music.save()
+            return redirect("music:music_list")
+    else:
+        form = MusicForm()
+
+    return render(request, "music/music_form.html", {"form": form})
+
+
+def music_edit(request:HttpRequest, pk:int) -> HttpResponse:
+    music = Music.objects.get(pk=pk)
+    if request.method == "POST":
+        form = MusicForm(request.POST, request.FILES, instance=music)
+        if form.is_valid():
+            form.save()
+            return redirect("music:music_list")
+    else:
+        form = MusicForm(instance=music)
+
+    return render(request, "music/music_form.html", {"form": form})

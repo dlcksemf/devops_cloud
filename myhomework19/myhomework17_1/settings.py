@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third apps
     'imagekit',
+    'bootstrap5',
     # local apps
     'music',
 ]
