@@ -1,5 +1,5 @@
 from django.urls import path
-from diary.views import post_list, post_detail, tag_detail, post_new, post_edit
+from diary.views import post_list, post_detail, tag_detail, post_new, post_edit, comment_new, comment_edit
 
 app_name = "diary"
 
@@ -9,4 +9,6 @@ urlpatterns = [
     path('new/', post_new, name="post_new"),
     path('edit/<int:pk>/', post_edit, name="post_edit"),
     path('tags/<str:tag_name>/', tag_detail, name="tag_detail"),
+    path('<int:post_pk>/comments/new', comment_new, name="comment_new"),
+    path('<int:post_pk>/comments/<int:pk>/edit', comment_edit, name="comment_edit"),
 ]
