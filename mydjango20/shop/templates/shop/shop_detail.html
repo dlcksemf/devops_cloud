@@ -15,6 +15,7 @@
 
     <hr/>
     <h6>Review</h6>
+    <a href="{% url "shop:review_new" shop.pk %}">새로운 댓글 작성</a>
     {% for review in review_list %}
         {{ review.author_name }}
         {{ review.message }}
