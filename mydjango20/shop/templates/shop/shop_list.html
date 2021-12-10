@@ -2,15 +2,17 @@
 
 {% block content %}
 
-    <form action="" method="get">
-        <input type="text" name="query" value="{{ request.GET.query }}" />
-        <input type="submit" value="검색"/>
-    </form>
+    <h5>음식점 리스트</h5>
+    <p/>
+    <ul>
+        {% for shop in shop_list %}
+            <li>
+                <a href="{% url "shop:shop_detail" shop.pk %}">{{ shop.name }}</a>
+                {{ shop.created_at|timesince }} ago
+            </li>
+        {% endfor %}
+    </ul>
 
-    <a href="{% url "shop:shop_new" %}">새로 등록하기</a>
-
-    {% for shop in shop_list %}
-        <a href="{% url "shop:shop_detail" shop.pk %}">{{ shop.name }}</a>
-    {% endfor %}
+    <a href="{% url "shop:shop_new" %}" class="btn btn-primary">새로 등록하기</a>
 
 {% endblock %}

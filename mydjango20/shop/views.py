@@ -27,6 +27,15 @@ def shop_detail(request:HttpRequest, pk:int) -> HttpResponse:
     })
 
 
+def tag_detail(request: HttpRequest, tag_name:str) -> HttpResponse:
+    qs = Shop.objects.all()
+    qs = qs.filter(tag_set__name=tag_name)
+
+    return render(request, "shop/tag_detail.html", {
+        "shop_list": qs,
+    })
+
+
 # /shop/new/
 def shop_new(request: HttpRequest) -> HttpResponse:
     # raise NotImplementedError("곧 구현 예정")
