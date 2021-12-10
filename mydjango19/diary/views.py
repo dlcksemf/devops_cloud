@@ -105,6 +105,7 @@ def comment_edit(request: HttpRequest, post_pk:int, pk:int) -> HttpResponse:
         form = CommentForm(request.POST, request.FILES, instance=comment)
         if form.is_valid():
             form.save()
+            messages.success(request, "성공적으로 댓글을 수정 했습니다!")
             return redirect("diary:post_detail", post_pk)
     else:
         form = CommentForm(instance=comment)
