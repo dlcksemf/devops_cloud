@@ -1,0 +1,11 @@
+{% extends "shop/layout.html" %}
+
+{% block content %}
+
+    <a href="{% url "shop:shop_new" %}">새로 등록하기</a>
+
+    {% for shop in shop_list %}
+        <a href="{% url "shop:shop_detail" shop.pk %}">{{ shop.name }}</a>
+    {% endfor %}
+
+{% endblock %}

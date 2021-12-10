@@ -6,7 +6,7 @@ from django.urls import path, include
 
 
 def root(request):
-    return redirect("shop:shop_new")
+    return redirect("shop:shop_list")
 
 
 urlpatterns = [
