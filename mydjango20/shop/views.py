@@ -29,3 +29,19 @@ def shop_new(request: HttpRequest) -> HttpResponse:
         "form": form,
     })
 
+
+# /shop/edit/"number"
+def shop_edit(request: HttpRequest, shop_pk:int) -> HttpResponse:
+    shop = get_object_or_404(Shop, pk=shop_pk)
+
+    if request.method == "POST":
+        form = ShopForm(request.POST, request.FILES, instance=shop)
+        if form.is_valid():
+            saved_post = form.save()
+            return redirect("shop:shop_detail", saved_post.pk)
+    else:
+        form = ShopForm(instance=shop)
+
+    return render(request, "shop/shop_new.html", {
+        "form": form,
+    })

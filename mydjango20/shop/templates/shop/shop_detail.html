@@ -9,4 +9,6 @@
     <hr />
     {{ shop.created_at|timesince }}전에 등록
 
+    <a href="{% url "shop:shop_edit" shop.pk %}" class="btn btn-primary">수정하기</a>
+
 {% endblock %}
