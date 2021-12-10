@@ -20,6 +20,7 @@
         {{ review.author_name }}
         {{ review.message }}
         {{ review.created_at }}
+        <a href="{% url "shop:review_edit" shop.pk review.pk %}">Edit review</a>
     {% endfor %}
 
     <a href="{% url "shop:shop_edit" shop.pk %}" class="btn btn-primary">수정하기</a>

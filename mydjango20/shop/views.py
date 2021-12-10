@@ -1,12 +1,15 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from shop.forms import ShopForm, ReviewForm
-from shop.models import Shop
+from shop.models import Shop, Review
 
 
 # /
 def shop_list(request:HttpRequest) -> HttpResponse:
     qs = Shop.objects.all()
+    query = request.GET.get("query", "")
+    if query:
+        qs = qs.filter(name__icontains=query)
     return render(request, "shop/shop_list.html", {
         "shop_list": qs,
     })
@@ -70,6 +73,21 @@ def review_new(request: HttpRequest, shop_pk:int) -> HttpResponse:
             return redirect("shop:shop_detail", shop_pk)
     else:
         form = ReviewForm()
+
+    return render(request, "shop/review_form.html", {
+        "form": form,
+    })
+
+
+def review_edit(request: HttpRequest, shop_pk:int, pk:int) -> HttpResponse:
+    review = get_object_or_404(Review, pk=pk)
+    if request.method == "POST":
+        form = ReviewForm(request.POST, request.FILES, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect("shop:shop_detail", shop_pk)
+    else:
+        form = ReviewForm(instance=review)
 
     return render(request, "shop/review_form.html", {
         "form": form,
