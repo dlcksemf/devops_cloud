@@ -4,10 +4,22 @@
 
     <h2>{{ shop.name }}</h2>
 
+    {% for tag in tag_list %}
+        <a href="{% url "shop:shop_list" %}" class="btn btn-primary">{{ tag.name }}</a>
+    {% endfor %}
+
     {{ shop.description|linebreaks }}
 
     <hr />
     {{ shop.created_at|timesince }}전에 등록
+
+    <hr/>
+    <h6>Review</h6>
+    {% for review in review_list %}
+        {{ review.author_name }}
+        {{ review.message }}
+        {{ review.created_at }}
+    {% endfor %}
 
     <a href="{% url "shop:shop_edit" shop.pk %}" class="btn btn-primary">수정하기</a>
 
