@@ -1,2 +1,4 @@
 django~=3.2.0
 pillow
+django-bootstrap-v5
+django-debug-toolbar
