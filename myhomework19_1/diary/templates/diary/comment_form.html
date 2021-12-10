@@ -1,0 +1,12 @@
+{% extends "diary/layout.html" %}
+{% load bootstrap5 %}
+
+<h5>Comment form</h5>
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" value="저장">
+</form>
+{% endblock %}
