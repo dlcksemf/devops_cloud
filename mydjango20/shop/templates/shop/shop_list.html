@@ -1,18 +1,49 @@
 {% extends "shop/layout.html" %}
 
+{% block header_right %}
+
+    <form action="{% url "shop:shop_list" %}" method="get">
+        <input type="text" name="query" value="{{ request.GET.query }}">
+        <input type="submit" value="검색">
+    </form>
+
+{% endblock %}
+
+
 {% block content %}
 
-    <h5>음식점 리스트</h5>
-    <p/>
-    <ul>
-        {% for shop in shop_list %}
-            <li>
-                <a href="{% url "shop:shop_detail" shop.pk %}">{{ shop.name }}</a>
-                {{ shop.created_at|timesince }} ago
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="d-flex align-items-center justify-content-center m-4">
+        <ul class="list-group list-group-horizontal">
+            <a href="{% url "shop:shop_list" %}">
+                <li class="list-group-item list-group-item-primary">전체 보기</li>
+            </a>
+            {% for tag in tag_list %}
+                <a href="{% url "shop:tag_detail" tag.name %}">
+                    <li class="list-group-item">
+                        {{ tag.name }}
+                    </li>
+                </a>
+            {% endfor %}
+        </ul>
+    </div>
 
-    <a href="{% url "shop:shop_new" %}" class="btn btn-primary">새로 등록하기</a>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+
+        {% for shop in shop_list %}
+            <div class="col">
+                <div class="card text-center" style="width: 15rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ shop.name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ shop.telephone }}</h6>
+                        <p class="card-text">{{ shop.description|truncatechars:15 }}</p>
+                        <h6>{{ shop.created_at|timesince }} 전 등록</h6>
+                    </div>
+                    <a href="{% url "shop:shop_detail" shop.pk %}" class="card-footer">자세히보기</a>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
 
 {% endblock %}

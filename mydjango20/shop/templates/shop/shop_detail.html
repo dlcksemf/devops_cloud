@@ -1,28 +1,40 @@
 {% extends "shop/layout.html" %}
 
+{% block header_left %}
+
+    <a href="{% url "shop:shop_edit" shop.pk %}" class="nav-link link-dark px-2">Edit</a>
+
+{% endblock %}
+
 {% block content %}
 
-    <h2>{{ shop.name }}</h2>
+    <h2 class="mt-4">{{ shop.name }}</h2>
 
-    {% for tag in tag_list %}
-        <a href="{% url "shop:tag_detail" tag.name %}" class="badge bg-primary">{{ tag.name }}</a>
-    {% endfor %}
+    <div class="my-3">
+        {% for tag in tag_list %}
+            <a href="{% url "shop:tag_detail" tag.name %}" class="badge bg-primary">{{ tag.name }}</a>
+        {% endfor %}
+    </div>
 
     {{ shop.description|linebreaks }}
 
-    <hr />
-    {{ shop.created_at|timesince }}전에 등록
+    <hr/>
+    {{ shop.created_at|timesince }} 전에 등록
 
     <hr/>
-    <h6>Review</h6>
-    <a href="{% url "shop:review_new" shop.pk %}">새로운 댓글 작성</a>
-    {% for review in review_list %}
-        {{ review.author_name }}
-        {{ review.message }}
-        {{ review.created_at }}
-        <a href="{% url "shop:review_edit" shop.pk review.pk %}">Edit review</a>
-    {% endfor %}
 
-    <a href="{% url "shop:shop_edit" shop.pk %}" class="btn btn-primary">수정하기</a>
+    <h5>Review
+        <a href="{% url "shop:review_new" shop.pk %}" class="badge bg-secondary">New</a>
+    </h5>
+    <ul>
+        {% for review in review_list %}
+            <li>
+                {{ review.author_name }} :
+                {{ review.message }} //
+                {{ review.created_at|timesince }} 전에 등록
+                <a href="{% url "shop:review_edit" shop.pk review.pk %}">Edit</a>
+            </li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}

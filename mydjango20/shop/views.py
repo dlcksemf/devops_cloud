@@ -1,17 +1,26 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from shop.forms import ShopForm, ReviewForm
-from shop.models import Shop, Review
+from shop.models import Shop, Review, Tag
 
 
-# /
+#/
+def shop_main(request:HttpRequest) -> HttpResponse:
+    tag_list = Tag.objects.all()
+    context = {"tag_list": tag_list}
+    return render(request,"shop/shop_main.html", context)
+
+
+# /list/
 def shop_list(request:HttpRequest) -> HttpResponse:
     qs = Shop.objects.all()
+    tag_list = Tag.objects.all()
     query = request.GET.get("query", "")
     if query:
         qs = qs.filter(name__icontains=query)
     return render(request, "shop/shop_list.html", {
         "shop_list": qs,
+        "tag_list": tag_list,
     })
 
 
@@ -30,9 +39,11 @@ def shop_detail(request:HttpRequest, pk:int) -> HttpResponse:
 def tag_detail(request: HttpRequest, tag_name:str) -> HttpResponse:
     qs = Shop.objects.all()
     qs = qs.filter(tag_set__name=tag_name)
+    tag_list = Tag.objects.all()
 
     return render(request, "shop/tag_detail.html", {
         "shop_list": qs,
+        "tag_list": tag_list,
     })
 
 

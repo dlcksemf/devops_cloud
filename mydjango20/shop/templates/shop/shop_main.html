@@ -1,0 +1,22 @@
+{% extends "shop/layout.html" %}
+
+{% block content %}
+
+    <div class="d-flex align-items-center justify-content-center" style="height: 300px;">
+        <h5 class="fs-1">Shop</h5>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center">
+        <a href="{% url "shop:shop_list" %}">
+            <h6 class="badge bg-secondary m-2">All</h6>
+        </a>
+        {% for tag in tag_list %}
+
+            <a href="{% url "shop:tag_detail" tag.name %}">
+                <h6 class="badge bg-secondary m-2">{{ tag.name }}</h6>
+            </a>
+
+        {% endfor %}
+    </div>
+
+{% endblock %}
