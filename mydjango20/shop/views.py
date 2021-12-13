@@ -1,7 +1,7 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from shop.forms import ShopForm, ReviewForm
-from shop.models import Shop, Review, Tag
+from shop.models import Shop, Review, Tag, Category
 
 
 #/
@@ -13,14 +13,21 @@ def shop_main(request:HttpRequest) -> HttpResponse:
 
 # /list/
 def shop_list(request:HttpRequest) -> HttpResponse:
-    qs = Shop.objects.all()
+    qs = Shop.objects.all() #order_by("_id")
     tag_list = Tag.objects.all()
+    category_qs = Category.objects.all()
     query = request.GET.get("query", "")
     if query:
         qs = qs.filter(name__icontains=query)
+
+    category_id: str = request.GET.get("category_id", "")
+    if category_id:
+        qs = qs.filter(category__pk=category_id)
+
     return render(request, "shop/shop_list.html", {
         "shop_list": qs,
         "tag_list": tag_list,
+        "category_list": category_qs,
     })
 
 
@@ -54,6 +61,7 @@ def shop_new(request: HttpRequest) -> HttpResponse:
         form = ShopForm(request.POST, request.FILES)
         if form.is_valid():
             saved_post = form.save()
+
             # shop_detail 뷰를 구현 했다면 !!!
             return redirect("shop:shop_detail", saved_post.pk)
     else:

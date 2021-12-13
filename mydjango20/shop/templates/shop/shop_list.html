@@ -1,49 +1,52 @@
 {% extends "shop/layout.html" %}
 
-{% block header_right %}
-
-    <form action="{% url "shop:shop_list" %}" method="get">
-        <input type="text" name="query" value="{{ request.GET.query }}">
-        <input type="submit" value="검색">
-    </form>
-
-{% endblock %}
-
 
 {% block content %}
 
-    <div class="d-flex align-items-center justify-content-center m-4">
-        <ul class="list-group list-group-horizontal">
-            <a href="{% url "shop:shop_list" %}">
-                <li class="list-group-item list-group-item-primary list-group-item-action">전체 보기</li>
-            </a>
-            {% for tag in tag_list %}
-                <a href="{% url "shop:tag_detail" tag.name %}">
-                    <li class="list-group-item list-group-item-action">
-                        {{ tag.name }}
-                    </li>
-                </a>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div class="row row-cols-1 row-cols-md-4 g-4">
-
-        {% for shop in shop_list %}
-            <div class="col">
-                <div class="card text-center" style="width: 15rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ shop.name }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ shop.telephone }}</h6>
-                        <p class="card-text">{{ shop.description|truncatechars:15 }}</p>
-                        <h6>{{ shop.created_at|timesince }} 전 등록</h6>
+    <div class="row">
+        <div class="col-sm-8">
+            <h2>Shop List</h2>
+            {% for shop in shop_list %}
+                <div class="col-sm-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ shop.name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ shop.telephone }}</h6>
+                            <p class="card-text">{{ shop.description|truncatechars:15 }}</p>
+                            <h6>{{ shop.created_at|timesince }} 전 등록</h6>
+                        </div>
+                        <a href="{% url "shop:shop_detail" shop.pk %}" class="card-footer">자세히보기</a>
                     </div>
-                    <a href="{% url "shop:shop_detail" shop.pk %}" class="card-footer">자세히보기</a>
                 </div>
+            {% endfor %}
+        </div>
+        <div class="col-sm-4">
+            <form action="{% url "shop:shop_list" %}" method="get">
+                <input type="text"
+                       name="query"
+                       placeholder="검색어를 입력해주세요."
+                       value="{{ request.GET.query }}">
+                <input type="submit" value="검색">
+            </form>
+
+            <div class="d-flex align-items-center justify-content-center m-4">
+                <ul class="list-group">
+                    <a href="?category_id">
+                        <li class="list-group-item list-group-item-primary list-group-item-action">전체 보기</li>
+                    </a>
+                    {% for category in category_list %}
+                        <a href="?category_id={{ category.pk }}">
+                            <li class="list-group-item list-group-item-action">
+                                {{ category.name }}
+                            </li>
+                        </a>
+                    {% endfor %}
+                </ul>
             </div>
-        {% endfor %}
+        </div>
 
     </div>
+
 
 
 {% endblock %}
