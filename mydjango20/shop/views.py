@@ -13,11 +13,12 @@ def shop_main(request:HttpRequest) -> HttpResponse:
 
 # /list/
 def shop_list(request:HttpRequest) -> HttpResponse:
-    qs = Shop.objects.all()
+    qs = Shop.objects.all() #order_by("_id")
     tag_list = Tag.objects.all()
     query = request.GET.get("query", "")
     if query:
         qs = qs.filter(name__icontains=query)
+
     return render(request, "shop/shop_list.html", {
         "shop_list": qs,
         "tag_list": tag_list,
