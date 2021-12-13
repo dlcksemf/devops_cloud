@@ -27,9 +27,16 @@
             </a>
 
             <ul>
+                <li>
+                    <a href="?category_id=">
+                        전체
+                    </a>
+                </li>
                 {% for category in category_list %}
                     <li>
-                        {{ category.name }}
+                        <a href="?category_id={{ category.pk }}">
+                            {{ category.name }}
+                        </a>
                     </li>
                 {% endfor %}
             </ul>
