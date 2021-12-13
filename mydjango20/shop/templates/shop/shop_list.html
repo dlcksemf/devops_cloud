@@ -15,15 +15,30 @@
 
 {% block content %}
 
+{#    <div class="d-flex align-items-center justify-content-center m-4">#}
+{#        <ul class="list-group list-group-horizontal">#}
+{#            <a href="{% url "shop:shop_list" %}">#}
+{#                <li class="list-group-item list-group-item-primary list-group-item-action">전체 보기</li>#}
+{#            </a>#}
+{#            {% for tag in tag_list %}#}
+{#                <a href="{% url "shop:tag_detail" tag.name %}">#}
+{#                    <li class="list-group-item list-group-item-action">#}
+{#                        {{ tag.name }}#}
+{#                    </li>#}
+{#                </a>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </div>#}
+
     <div class="d-flex align-items-center justify-content-center m-4">
         <ul class="list-group list-group-horizontal">
-            <a href="{% url "shop:shop_list" %}">
+            <a href="?category_id">
                 <li class="list-group-item list-group-item-primary list-group-item-action">전체 보기</li>
             </a>
-            {% for tag in tag_list %}
-                <a href="{% url "shop:tag_detail" tag.name %}">
+            {% for category in category_list %}
+                <a href="?category_id={{ category.pk }}">
                     <li class="list-group-item list-group-item-action">
-                        {{ tag.name }}
+                        {{ category.name }}
                     </li>
                 </a>
             {% endfor %}
