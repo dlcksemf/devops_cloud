@@ -1,0 +1,23 @@
+{% extends "music/layout.html" %}
+
+{% block content %}
+
+    <h2>{{ music.title }}</h2>
+    <a href="{% url "music:music_edit" music.pk %}" class="btn btn-primary">수정하기</a>
+
+    <p>
+        {% for tag in tag_list %}
+            <span class="badge bg-primary">
+            {{ tag.name }}
+        </span>
+        {% endfor %}
+    </p>
+
+    {{ music.description|linebreaks }}
+
+    <hr />
+    {{ music.created_at|timesince }} before
+
+    <a href="{% url "music:music_list" %}" class="btn btn-primary">목록으로</a>
+
+{% endblock %}

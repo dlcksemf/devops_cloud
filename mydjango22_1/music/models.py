@@ -13,7 +13,7 @@ class Music(TimeStamped):
     title = models.CharField(max_length=50, db_index=True)
     artist = models.CharField(max_length=50)
     description = models.TextField(blank=True)
-    categoty = models.ForeignKey("Category", on_delete=models.CASCADE)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
     tag_set = models.ManyToManyField("Tag", blank=True)
 
     def __str__(self):

@@ -4,14 +4,34 @@
 
     <div class="row">
         <div class="col-sm-8">
-            {% for music in music_list %}
-                {{ music.title }}
-            {% endfor %}
+            <ul>
+                {% for music in music_list %}
+                    <li>
+                        <a href="{% url "music:music_detail" music.pk %}">
+                            {{ music.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
         <div class="col-sm-4">
-            {% for category in category_list %}
-                {{ category.name }}
-            {% endfor %}
+            <form action="" method="get">
+                <input type="text" name="query" value="{{ request.GET.query }}">
+                <input type="submit" value="검색">
+            </form>
+            <a href="{% url "music:music_new" %}" class="btn btn-primary">등록</a>
+            <ul>
+                <li>
+                    <a href="?category_id=">전체 보기</a>
+                </li>
+                {% for category in category_list %}
+                    <li>
+                        <a href="?category_id={{ category.pk }}">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
 
     </div>
