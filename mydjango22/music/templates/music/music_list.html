@@ -1,0 +1,42 @@
+{% extends "music/layout.html" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-8">
+            <h2>Music list</h2>
+            <ul>
+                {% for music in music_list %}
+                    <li>
+                        <a href="{% url "music:music_detail" music.pk %}">
+                            {{ music.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm-4">
+            <form action="" method="get">
+                <input type="text" name="query" value="{{ request.GET.query }}">
+                <input type="submit" value="검색">
+            </form>
+            <a href="{% url "music:music_new" %}" class="btn btn-primary">새로 만들기</a>
+
+            <ul>
+                <li>
+                    <a href="?category_id=">전체보기</a>
+                </li>
+                {% for category in category_list %}
+                    <li>
+                        <a href="?category_id={{ category.pk }}">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+
+{% endblock %}
