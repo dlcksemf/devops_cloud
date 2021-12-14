@@ -5,6 +5,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('music/', include('music.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, base_dir=settings.MEDIA_ROOT)
