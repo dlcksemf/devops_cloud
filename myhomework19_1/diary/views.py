@@ -57,7 +57,7 @@ def post_edit(request: HttpRequest, pk:int) -> HttpResponse:
         if form.is_valid():
             form.save()
             messages.success(request, "데이터 저장에 성공했습니다.")
-            return redirect("diary:post_list")
+            return redirect("diary:post_detail", post.pk)
 
     else:
         form = PostForm(instance=post)
