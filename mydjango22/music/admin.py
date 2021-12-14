@@ -5,7 +5,7 @@ from music.forms import MusicForm
 
 @admin.register(Music)
 class MusicAdmin(admin.ModelAdmin):
-    form = MusicForm
+    pass
 
 
 @admin.register(Tag)

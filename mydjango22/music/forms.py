@@ -9,11 +9,11 @@ class MusicForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if self.instance.pk:
             tag_qs = self.instance.tag_set.all()
-            tags = " ,".join([tag.name for tag in tag_qs])
-            self.fields["tags"].initial = tags
+            tags = ", ".join([tag.name for tag in tag_qs])
+            self.field.initial["tags"] = tags
 
-    def _save_m2m(self):
-        saved_music = super()._save_m2m()
+    def save(self):
+        saved_music = super().save()
         tag_list = []
         tags = self.cleaned_data.get("tags", "")
         for word in tags.split(","):
@@ -21,8 +21,8 @@ class MusicForm(forms.ModelForm):
             tag, __ = Tag.objects.get_or_create(name=tag_name)
             tag_list.append(tag)
 
-        self.instance.tag_set.clear()
-        self.instance.tag_set.add(*tag_list)
+        saved_music.tags.clear()
+        saved_music.tags.add(*tag_list)
 
         return saved_music
 
