@@ -22,12 +22,13 @@ post_detail = DetailView.as_view(
 class PostCreateView(CreateView):
     model = Post
     form_class = PostForm
+
     # success_url = reverse_lazy("blog:post_list")
 
-    def get_success_url(self):
+    # def get_success_url(self):
         # self.object # 저장된 모델 인스턴스
-        post_pk = self.object.pk
-        return reverse("blog:post_detail", args=[post_pk]) # 문자열
+        # post_pk = self.object.pk
+        # return reverse("blog:post_detail", args=[post_pk]) # 문자열
         # return resolve_url("blog:post_detail", post_pk) # 문자열
         # return redirect("blog:post_detail", post_pk) # HttpResponse
         # {% url "blog:post_detail" post_pk %} # 문자열
@@ -42,9 +43,9 @@ class PostUpdateView(UpdateView):
     model = Post
     form_class = PostForm
 
-    def get_success_url(self):
-        post_pk = self.object.pk
-        return reverse("blog:post_detail", args=[post_pk]) # 문자열
+    # def get_success_url(self):
+    #     post_pk = self.object.pk
+    #     return reverse("blog:post_detail", args=[post_pk]) # 문자열
 
 
 post_edit = PostUpdateView.as_view()
