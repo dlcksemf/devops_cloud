@@ -1,0 +1,21 @@
+{% extends "blog/layout.html" %}
+{% load bootstrap5 %}
+
+{% block content %}
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        <input type="submit" value="저장하기"/>
+
+    </form>
+
+    <hr/>
+    <a href="{% url "blog:post_list" %}">목록으로</a>
+
+    {% if post %}
+        <a href="{% url "blog:post_detail" post.pk %}">detail 페이지로 돌아가기기</a>
+    {% endif %}
+
+{% endblock %}
