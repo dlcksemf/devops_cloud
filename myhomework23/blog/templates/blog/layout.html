@@ -13,6 +13,10 @@
 </head>
 <body>
 <div class="container">
+    {% if not user.is_authenticated %}
+        <a href="{% url "accounts:signup" %}">회원가입</a>
+    {% endif %}
+
     <h2>Blog</h2>
 
     {% bootstrap_messages %}
