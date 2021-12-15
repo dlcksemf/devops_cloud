@@ -1,0 +1,13 @@
+{% extends "blog/layout.html" %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="삭제하겠습니다.">
+    </form>
+
+    <hr/>
+
+    <a href="{% url "blog:post_list" %}">목록으로 돌아가기</a>
+    <a href="{% url "blog:post_detail" post.pk %}">포스트로 돌아가기</a>
+{% endblock %}

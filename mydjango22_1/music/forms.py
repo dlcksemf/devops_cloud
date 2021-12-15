@@ -1,9 +1,8 @@
+from music.models import Music, Tag
 from django import forms
 
-from diary.models import Post, Comment, Tag
 
-
-class PostForm(forms.ModelForm):
+class MusicForm(forms.ModelForm):
     tags = forms.CharField()
 
     def __init__(self, *args, **kwargs):
@@ -14,30 +13,24 @@ class PostForm(forms.ModelForm):
             self.fields["tags"].initial = tags
 
     def save(self):
-        saved_post = super().save()
+        saved_music = super().save()
         tag_list = []
-        tags = self.cleaned_data.get("tags")
+        tags = self.cleaned_data.get("tags", "")
         for word in tags.split(","):
             tag_name = word.strip()
             tag, __ = Tag.objects.get_or_create(name=tag_name)
             tag_list.append(tag)
 
-        saved_post.tag_set.clear()
-        saved_post.tag_set.add(*tag_list)
+        saved_music.tag_set.clear()
+        saved_music.tag_set.add(*tag_list)
 
-        return saved_post
+        return saved_music
 
     class Meta:
-        model = Post
+        model = Music
         fields = [
-            "author_name",
             "title",
-            "content",
-            "photo"
+            "artist",
+            "description",
+            "category",
         ]
-
-
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ["author_name", "message"]

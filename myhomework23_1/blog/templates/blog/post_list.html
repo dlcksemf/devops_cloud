@@ -1,0 +1,17 @@
+{% extends "blog/layout.html" %}
+
+
+{% block content %}
+
+    <a href="{% url "blog:post_new" %}" class="btn btn-primary">새로 만들기</a>
+
+    <ul>
+        {% for post in post_list %}
+            <li>
+                <a href="{% url "blog:post_detail" post.pk %}">
+                    {{ post.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
