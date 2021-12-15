@@ -2,6 +2,10 @@
 
 {% block content %}
 
+    <a href="{% url "blog:post_new" %}" class="btn btn-primary">새로운 포스트 작성</a>
+
+    <hr/>
+
     <table>
         <thead>
         {% for post in post_list %}
@@ -12,6 +16,6 @@
         </thead>
     </table>
 
-    <a href="{% url "blog:post_new" %}" class="btn btn-primary">새로운 포스트 작성</a>
+
 
 {% endblock %}

@@ -10,5 +10,10 @@
     </form>
 
     <hr />
-    <a href="{% url "blog:post_detail" post.pk %}" class="btn btn-primary">조회 화면으로</a>
+    <a href="{% url "blog:post_list" %}" class="btn btn-primary">목록으로</a>
+
+    <hr/>
+    {% if post %}
+        <a href="{% url "blog:post_detail" post.pk %}" class="btn btn-primary">취소</a>
+    {% endif %}
 {% endblock %}
