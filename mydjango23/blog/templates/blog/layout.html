@@ -15,6 +15,20 @@
 <div class="container">
     <h2>Blog</h2>
     {% bootstrap_messages %}
+
+
+    <ul>
+        {% if not user.is_authenticated %}
+            <li><a href="{% url "accounts:login" %}">Login</a></li>
+            <li><a href="{% url "accounts:signup" %}">Sign Up</a></li>
+        {% else %}
+            <li><a href="{% url "accounts:profile" %}">
+                {{ user.username|upper }}'s Profile
+            </a></li>
+            <li><a href="{% url "accounts:logout" %}">Logout</a></li>
+        {% endif %}
+    </ul>
+
     {% block content %}{% endblock %}
 
     <hr/>
