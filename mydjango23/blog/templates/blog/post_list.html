@@ -1,0 +1,17 @@
+{% extends "blog/layout.html" %}
+
+{% block content %}
+
+    <table>
+        <thead>
+        {% for post in post_list %}
+            <a href="{% url "blog:post_detail" post.pk %}">
+                {{ post.title }}
+            </a>
+        {% endfor %}
+        </thead>
+    </table>
+
+    <a href="{% url "blog:post_new" %}" class="btn btn-primary">새로운 포스트 작성</a>
+
+{% endblock %}
