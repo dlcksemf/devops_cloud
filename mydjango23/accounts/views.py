@@ -1,13 +1,16 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from PIL import Image
 
+login = LoginView.as_view(
+    template_name="accounts/login.html",
 
-def login(request):
-    pass
+)
 
 
 def profile_image(reqeust: HttpRequest) -> HttpResponse:
@@ -45,11 +48,11 @@ def signup(request):
 #     template_name="accounts/signup_form.html"
 # )
 
+@login_required
 def profile(request):
-    pass
+    return render(request, "accounts/profile.html")
 
 
-def logout(request):
-    pass
-
-
+logout = LogoutView.as_view(
+    next_page="accounts:login",
+)
