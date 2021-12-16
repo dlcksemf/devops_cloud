@@ -1,4 +1,5 @@
 from django.contrib import admin
+from blog.forms import PostForm
 from blog.models import Post, Comment, Category, Tag
 
 
@@ -9,7 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    pass
+    form = PostForm
 
 
 @admin.register(Comment)

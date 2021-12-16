@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from PIL import Image
 
+
 def login(request):
     pass
 
