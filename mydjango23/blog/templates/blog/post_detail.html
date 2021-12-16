@@ -1,5 +1,11 @@
 {% extends "blog/layout.html" %}
 
+{% block page_title %}
+    {{ block.super }} ::
+    {{ post.title }}
+{% endblock %}
+
+
 {% block content %}
 
 
