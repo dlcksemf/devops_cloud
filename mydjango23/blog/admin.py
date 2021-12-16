@@ -1,6 +1,11 @@
 from django.contrib import admin
 from blog.forms import PostForm
-from blog.models import Post, Comment, Category, Tag
+from blog.models import Post, Comment, Category, Tag, Subscriber
+
+
+@admin.register(Subscriber)
+class SubscriberAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Category)

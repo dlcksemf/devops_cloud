@@ -6,8 +6,8 @@
     <h2>{{ post.title }}</h2>
 
     <p>
-        {% for tag in poas.tag_set.all %}
-            {{ tag.name }}
+        {% for tag in post.tag_set.all %}
+            <h6 class="badge bg-primary">{{ tag.name }}</h6>
         {% endfor %}
     </p>
 

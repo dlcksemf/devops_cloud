@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from blog.models import Post, Comment, Tag, Category
-from blog.forms import PostForm, CommentForm
+from django.views.generic import CreateView
+
+from blog.models import Post, Comment, Tag, Category, Subscriber
+from blog.forms import PostForm, CommentForm, SubscriberForm
 
 
 def post_list(request: HttpRequest) -> HttpResponse:
@@ -89,3 +91,9 @@ def comment_new(request: HttpRequest) -> HttpResponse:
 
 def comment_edit(request: HttpRequest) -> HttpResponse:
     raise NotImplementedError("comment_edit / 아직 구현하지 않았습니다.")
+
+
+subscriber_new = CreateView.as_view(
+    model=Subscriber,
+    form_class=SubscriberForm
+)
