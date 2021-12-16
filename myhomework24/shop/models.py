@@ -32,6 +32,7 @@ class Shop(TimeStampedModel):
             )
         ]
     )
+    description = models.TextField(blank=True)
     tag_set = models.ManyToManyField("Tag", blank=True)
 
     def get_absolute_url(self):
