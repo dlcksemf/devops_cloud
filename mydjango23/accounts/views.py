@@ -1,11 +1,22 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-
+from PIL import Image
 
 def login(request):
     pass
+
+
+def profile_image(reqeust: HttpRequest) -> HttpResponse:
+    canvas = Image.new("RGBA", (256, 256), (255, 0, 0, 255))
+    # text / image
+
+    response = HttpResponse(content_type="image/png")
+    canvas.save(response, "PNG")
+
+    return response
 
 
 # 새로운 User 인스턴스를 만드는 것.

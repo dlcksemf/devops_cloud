@@ -1,3 +1,4 @@
+import tablib
 from django.db import models
 from django.urls import reverse
 
@@ -44,6 +45,21 @@ class Post(TimeStampedModel):
     # post detail 주소 문자열을 반환
     # detail 페이지를 구현하자마자, 즉시 아래 메서드를 구현합니다.
 
+    @classmethod
+    def get_tabular_data(cls, queryset, format="xlsx") -> bytes:
+        dataset = tablib.Dataset()
+        dataset.headers = ["id", "title", "created_at", "updated_at"]
+        for post in queryset:
+            dataset.append(
+                [
+                    post.id,
+                    post.title,
+                    post.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                    post.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
+                ]
+            )
+
+        return dataset.export(format)
 
     class Meta:
         ordering = ["-id"]
