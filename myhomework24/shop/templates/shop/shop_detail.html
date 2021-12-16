@@ -11,13 +11,16 @@
 
 {% block content %}
 
-    {{ object.name }}
+    <h5>{{ object.name }}</h5>
 
     {% for tag in object.tag_set.all %}
         <p class="badge bg-primary">{{ tag.name }}</p>
     {% endfor %}
 
+    {{ object.description|linebreaks }}
+
     <hr/>
+
 
     <ul>
         {% for comment in object.comment_set.all %}
