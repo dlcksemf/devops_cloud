@@ -1,3 +1,22 @@
 from django.contrib import admin
+from shop.models import Tag, Comment, Shop, Category
 
-# Register your models here.
+
+@admin.register(Shop)
+class ShopAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    pass
