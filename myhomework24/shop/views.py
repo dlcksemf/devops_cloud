@@ -4,9 +4,20 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from shop.models import Shop, Tag, Comment, Category
 from shop.forms import ShopForm, CommentForm
 
-shop_list = ListView.as_view(
-    model=Shop
-)
+
+class ShopListView(ListView):
+    model = Shop
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        q = self.request.GET.get("q", "").strip()
+        if q:
+            qs = qs.filter(name__icontains=q)
+        return qs
+
+
+shop_list = ShopListView.as_view()
+
 
 shop_detail = DetailView.as_view(
     model=Shop,

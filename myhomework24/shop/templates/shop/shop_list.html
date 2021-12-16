@@ -1,5 +1,14 @@
 {% extends "shop/layout.html" %}
 
+{% block header_right %}
+
+    <form action="" method="get">
+        <input type="text" name="q" value="{{ request.GET.q }}">
+        <input type="submit" value="검색">
+    </form>
+
+{% endblock %}
+
 {% block content %}
 
     <ul>
