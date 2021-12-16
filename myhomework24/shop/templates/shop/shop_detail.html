@@ -1,0 +1,42 @@
+{% extends "shop/layout.html" %}
+
+{% block header_right %}
+
+    <a href="{% url "shop:comment_new" object.pk %}" class="btn btn-primary">
+        댓글 작성
+    </a>
+
+{% endblock %}
+
+
+{% block content %}
+
+    {{ object.name }}
+
+    {% for tag in object.tag_set.all %}
+        <p class="badge bg-primary">{{ tag.name }}</p>
+    {% endfor %}
+
+    <hr/>
+
+    <ul>
+        {% for comment in object.comment_set.all %}
+            <li>
+                {{ comment.message }}
+                <a href="{% url "shop:comment_edit" object.pk comment.pk %}">수정하기</a>
+                <a href="{% url "shop:comment_delete" object.pk comment.pk %}">삭제하기</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block footer %}
+
+    <a href="{% url "shop:shop_new" %}" class="btn btn-primary">새로 생성</a>
+
+    <a href="{% url "shop:shop_edit" object.pk %}" class="btn btn-primary">
+        가게 수정
+    </a>
+
+{% endblock %}

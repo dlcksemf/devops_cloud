@@ -48,6 +48,9 @@ class Comment(TimeStampedModel):
     post = models.ForeignKey(Shop, on_delete=models.CASCADE)
     message = models.TextField()
 
+    def get_absolute_url(self):
+        return reverse("shop:shop_detail", args=[self.post.pk])
+
     class Meta:
         ordering = ["-id"]
 

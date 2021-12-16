@@ -1,0 +1,46 @@
+{% load bootstrap5 %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block extra_head %}{% endblock %}</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+<div class="container">
+
+    <header class="py-3 mb-4 border-bottom">
+        <div class="container d-flex flex-wrap justify-content-center">
+            <a href="{% url "shop:shop_list" %}"
+               class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                <span class="fs-4">Shop</span>
+
+            </a>
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0">
+                {% block header_right %}{% endblock %}
+            </form>
+        </div>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <hr/>
+
+    {% block footer %}{% endblock %}
+
+    <hr/>
+    &copy; 2021.12.16. myhomework24.
+</div>
+
+</body>
+</html>
