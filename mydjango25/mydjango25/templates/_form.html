@@ -1,0 +1,17 @@
+{% load bootstrap5 %}
+
+{% block form %}
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        <input type="submit"
+               class="btn btn-primary"
+                {% if submit_label %}
+               value="{{ submit_label }}"
+                {% endif %}
+        />
+    </form>
+
+{% endblock %}
