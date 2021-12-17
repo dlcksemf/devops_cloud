@@ -1,9 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.shortcuts import resolve_url, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
+from shop.mixins import ReviewUserCheckMixin, ShopOwnerCheckMixin
 from shop.models import Category, Shop, Review, Tag
 from shop.forms import ShopForm, ReviewForm
 
@@ -15,6 +16,13 @@ class ShopListView(ListView):
         context_data = super().get_context_data(**kwargs)
         context_data["category_list"] = Category.objects.all()
         return context_data
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get("query", "").strip()
+        if query:
+            qs = qs.filter(name__icontains=query)
+        return qs
 
 
 shop_list = ShopListView.as_view()
@@ -41,15 +49,21 @@ class ShopCreateView(LoginRequiredMixin, CreateView):
 
 shop_new = ShopCreateView.as_view()
 
-shop_edit = UpdateView.as_view(
-    model=Shop,
-    form_class=ShopForm,
-)
 
-shop_delete = DeleteView.as_view(
-    model=Shop,
+class ShopUpdateView(LoginRequiredMixin, ShopOwnerCheckMixin, UpdateView):
+    model=Shop
+    form_class=ShopForm
+
+
+shop_edit = ShopUpdateView.as_view()
+
+
+class ShopDeleteView(LoginRequiredMixin, ShopOwnerCheckMixin, DeleteView):
+    model=Shop
     success_url=reverse_lazy('shop:shop_list')
-)
+
+
+shop_delete = ShopDeleteView.as_view()
 
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):
@@ -68,29 +82,31 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         return redirect(shop)
         # return super().form_valid(form)
 
-    def get_success_url(self):
-        return resolve_url('shop:shop_detail', self.kwargs['shop_pk'])
+    # def get_success_url(self):
+    #     return resolve_url('shop:shop_detail', self.kwargs['shop_pk'])
 
 
 review_new = ReviewCreateView.as_view()
 
 
-class ReviewUpdateView(UpdateView):
+class ReviewUpdateView(LoginRequiredMixin, ReviewUserCheckMixin, UpdateView):
     model = Review
     form_class = ReviewForm
 
     def get_success_url(self):
-        return resolve_url('shop:shop_detail', self.kwargs['shop_pk'])
+        review = self.object
+        return resolve_url(review.shop)
 
 
 review_edit = ReviewUpdateView.as_view()
 
 
-class ReviewDeleteView(DeleteView):
+class ReviewDeleteView(LoginRequiredMixin, ReviewUserCheckMixin, DeleteView):
     model = Review
 
     def get_success_url(self):
-        return resolve_url('shop:shop_detail', self.kwargs['shop_pk'])
+        review = self.object
+        return resolve_url(review.shop)
 
 
 review_delete = ReviewDeleteView.as_view()

@@ -2,6 +2,11 @@
 
 {% block content %}
 
+    <form action="" method="get">
+        <input type="text" name="query" value="{{ request.GET.query }}"/>
+        <input type="submit" value="검색"/>
+    </form>
+
     <ul>
         {% for category in category_list %}
             <li class="badge bg-primary">{{ category.name }}</li>
@@ -25,7 +30,7 @@
         </tbody>
     </table>
 
-    <hr />
+    <hr/>
     <a href="{% url "shop:shop_new" %}" class="btn btn-primary">새로 생성하기</a>
 
 {% endblock %}

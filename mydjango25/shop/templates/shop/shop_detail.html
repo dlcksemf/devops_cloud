@@ -28,8 +28,10 @@
             {{ review.message }}
             by {{ review.user }}
             at {{ review.created_at }}
-            <a href="{% url "shop:review_edit" shop.pk review.pk %}" class="btn btn-primary">리뷰 수정하기</a>
-            <a href="{% url "shop:review_delete" shop.pk review.pk %}" class="btn btn-danger">리뷰 삭제하기</a>
+            {% if review.user == user %}
+                <a href="{% url "shop:review_edit" shop.pk review.pk %}" class="btn btn-primary">리뷰 수정하기</a>
+                <a href="{% url "shop:review_delete" shop.pk review.pk %}" class="btn btn-danger">리뷰 삭제하기</a>
+            {% endif %}
         </div>
     {% empty %}
         등록된 리뷰가 없습니다.
@@ -37,7 +39,9 @@
 
     <hr/>
     <a href="{% url "shop:shop_list" %}" class="btn btn-primary">목록으로</a>
-    <a href="{% url "shop:shop_edit" shop.pk %}" class="btn btn-danger">가게 수정하기</a>
-    <a href="{% url "shop:shop_delete" shop.pk %}" class="btn btn-danger">가게 지우기</a>
+    {% if shop.owner == user %}
+        <a href="{% url "shop:shop_edit" shop.pk %}" class="btn btn-danger">가게 수정하기</a>
+        <a href="{% url "shop:shop_delete" shop.pk %}" class="btn btn-danger">가게 지우기</a>
+    {% endif %}
 
 {% endblock %}
