@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # third apps
     'bootstrap5',
     # local apps
+    'accounts',
+    'shop',
 ]
 
 if DEBUG:
