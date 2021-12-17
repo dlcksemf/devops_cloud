@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.validators import RegexValidator
 from django.db import models
+from django.urls import reverse
 
 
 class TimeStampedModel(models.Model):
@@ -32,6 +33,9 @@ class Shop(TimeStampedModel):
     description = models.TextField(blank=True)
     photo = models.ImageField(upload_to="shop/shop/%Y/%m/%d", blank=True)
     tag_set = models.ManyToManyField("Tag", blank=True)
+
+    def get_absolute_url(self):
+        return reverse("shop:shop_detail", args=[self.pk])
 
     def __str__(self):
         return self.name
