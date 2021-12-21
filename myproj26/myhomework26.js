@@ -10,12 +10,12 @@ const animal_names = [
     "frog",
     "snake",
     "wolf",
-]
+];
 
 let shuffled_animal_names = animal_names
   .map((value) => ({ value, sort: Math.random() }))
   .sort((a, b) => a.sort - b.sort)
-  .map(({ value }) => value)
+  .map(({ value }) => value);
 
 const sliced_animal_names = shuffled_animal_names.slice(0, 5);
 
