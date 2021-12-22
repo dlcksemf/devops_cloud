@@ -13,6 +13,8 @@ const countedArtist = song_array.reduce(function (allArtist, song) {
   return allArtist
 }, {});
 
+console.log(countedArtist)
+
 const filtered_artist = Object.values(countedArtist).filter(
   (value) => (value > 1)
 );
