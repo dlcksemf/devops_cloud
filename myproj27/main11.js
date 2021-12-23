@@ -12,4 +12,4 @@ for ( const song of song_array) {
     song_set.add( song.artist );
 }
 
-console.log(song_set.size);
+console.log(song_set.size); 
