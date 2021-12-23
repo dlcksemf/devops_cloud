@@ -1,0 +1,11 @@
+.songList {
+  background-color: blanchedalmond;
+  padding: 0;
+  margin: 0;
+}
+
+.songList li {
+  list-style: none;
+  background-color: antiquewhite;
+  margin: 5px;
+}
