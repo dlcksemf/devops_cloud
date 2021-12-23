@@ -1,8 +1,10 @@
-import { List, Avatar, Input, Popover } from 'antd';
+import { List, Avatar, Input, Space } from 'antd';
 import { useState } from 'react';
 
 import Axios from 'axios';
 import jsonpAdapter from 'axios-jsonp';
+
+const { Search } = Input;
 
 function MelonSearch() {
   const [query, setQuery] = useState('');
@@ -51,14 +53,19 @@ function MelonSearch() {
   };
 
   return (
-    <div style={{ width: 300, margin: '0 auto' }}>
+    <div style={{ width: 500, margin: '0 auto' }}>
       <h2>멜론 검색</h2>
+      <hr />
+      <Space direction="vertical">
+        <Search
+          placeholder="검색어를 입력해주세요."
+          onChange={handleChange}
+          onSearch={handlePressEnter}
+          style={{ width: 200 }}
+        />
+      </Space>
+      <hr />
       검색어 : {query}
-      <Input
-        placeholder="검색어를 입력해주세요."
-        onChange={handleChange}
-        onPressEnter={handlePressEnter}
-      />
       <List
         itemLayout="horizontal"
         dataSource={songList}
