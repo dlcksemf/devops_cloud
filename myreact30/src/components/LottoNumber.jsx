@@ -20,7 +20,6 @@ function LottoNumber() {
 
   return (
     <>
-      <h2>Lotto Number</h2>
       <button onClick={handleChange}>로또 숫자 뽑기</button>
       <hr />
       {numberList.map((number) => {
