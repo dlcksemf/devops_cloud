@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Ball from './Ball';
 
 function LottoNumber() {
   const [numberList, setNumberList] = useState([]);
@@ -22,23 +23,11 @@ function LottoNumber() {
     <>
       <button onClick={handleChange}>로또 숫자 뽑기</button>
       <hr />
-      {numberList.map((number) => {
-        return <div style={style}>{number}</div>;
-      })}
+      {numberList.map((number) => (
+        <Ball number={number} />
+      ))}
     </>
   );
 }
-const style = {
-  width: '100px',
-  height: '100px',
-  borderRadius: '50px',
-  lineHeight: '100px',
-  textAlign: 'center',
-  display: 'inline-block',
-  fontSize: '3rem',
-  margin: '1rem',
-  userSelect: 'none',
-  backgroundColor: 'red',
-};
 
 export default LottoNumber;

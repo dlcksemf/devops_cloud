@@ -14,7 +14,6 @@ function App() {
 
   return (
     <>
-      <h1>가나다의 리액트</h1>
       <TopNav changePageName={setPageName} />
       {pageName === 'about' && <PageAbout />}
       {pageName === 'counter' && <PageCounter />}
