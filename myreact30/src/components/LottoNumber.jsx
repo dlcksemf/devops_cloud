@@ -3,27 +3,16 @@ import { useState } from 'react';
 function LottoNumber() {
   const [numberList, setNumberList] = useState([]);
 
-  const randomInt = () => {
-    let randomNumberList = [];
+  const range = [...Array(45).keys()];
 
-    for (let i = 0; i < 7; i++) {
-      let num = Math.floor(Math.random() * 44) + 1;
-
-      for (const j in randomNumberList) {
-        if (num == randomNumberList[j]) {
-          num = Math.floor(Math.random() * 44) + 1;
-        }
-      }
-
-      randomNumberList.push(num);
-    }
-
-    randomNumberList.sort(function (a, b) {
+  const randomInt = range
+    .map((number) => ({ number, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ number }) => number + 1)
+    .slice(0, 7)
+    .sort((a, b) => {
       return a - b;
     });
-
-    return randomNumberList;
-  };
 
   const handleChange = () => {
     setNumberList(randomInt);

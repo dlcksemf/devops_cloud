@@ -4,14 +4,14 @@ import videoList from 'data/song_list_v2.json';
 import { Row, Col } from 'antd';
 
 function Playlist() {
-  const [videoUrl, setVideoUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState();
 
   return (
     <>
-      <h2>Player</h2>
       <Row>
         <Col span={14}>
-          <ReactPlayer url={videoUrl} />
+          {!videoUrl && <div>"영상을 선택 해주세요!"</div>}
+          {videoUrl && <ReactPlayer url={videoUrl} />}
         </Col>
         <Col span={10}>
           {videoList.map((video) => {
