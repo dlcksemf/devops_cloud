@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import PageAbout from 'pages/PageAbout';
+import PageCounter from 'pages/PageCounter';
+import TopNav from 'components/TopNav';
+import LottoNumber from 'components/LottoNumber';
+import Playlist from 'components/Playlist';
 
 function App() {
+  const [pageName, setPageName] = useState('about');
+
+  // const changePageName = (pageName) => {
+  //   setPageName(pageName);
+  // };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>가나다의 리액트</h1>
+      <TopNav changePageName={setPageName} />
+      {pageName === 'about' && <PageAbout />}
+      {pageName === 'counter' && <PageCounter />}
+      {pageName === 'lotto' && <LottoNumber />}
+      {pageName === 'playlist' && <Playlist />}
+    </>
   );
 }
 
