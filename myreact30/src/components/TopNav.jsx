@@ -5,7 +5,7 @@ function TopNav({ changePageName }) {
   const { Header } = Layout;
   return (
     <>
-      <Menu mode="horizontal" defaultSelectedKeys={['2']}>
+      <Menu mode="horizontal" defaultSelectedKeys={['1']}>
         <Menu.Item key="0" disabled>
           <h1>가나다의 리액트</h1>
         </Menu.Item>
