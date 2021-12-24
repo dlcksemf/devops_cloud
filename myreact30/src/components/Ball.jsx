@@ -1,6 +1,4 @@
-import React, { memo } from 'react';
-
-const Ball = memo(({ number }) => {
+const Ball = ({ number }) => {
   let background;
   if (number <= 10) {
     background = 'yellow';
@@ -18,7 +16,7 @@ const Ball = memo(({ number }) => {
       {number}
     </div>
   );
-});
+};
 
 const style = {
   width: '100px',
