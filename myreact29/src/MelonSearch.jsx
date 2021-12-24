@@ -1,4 +1,4 @@
-import { List, Avatar, Input, Space } from 'antd';
+import { Typography, List, Avatar, Input, Space, notification } from 'antd';
 import { useState } from 'react';
 
 import Axios from 'axios';
@@ -19,6 +19,7 @@ function MelonSearch() {
     console.groupEnd();
     setQuery(value);
   };
+
   const handlePressEnter = () => {
     console.group('handlePressEnter');
     console.log(`검색어 ${query}(으)로 검색합니다.`);
@@ -36,19 +37,30 @@ function MelonSearch() {
     })
       .then((response) => {
         const {
-          data: { SONGCONTENTS: searchedSongList },
+          data: { SONGCONTENTS: searchedSongList = [] },
         } = response;
         console.group('멜론 검색결과');
         console.log(response);
         console.log(searchedSongList);
         console.groupEnd();
-
         setSongList(searchedSongList);
+
+        const type = 'info';
+        notification[type]({
+          message: '멜론 검색',
+          description: `${searchedSongList.length}개의 노래 검색 결과가 있습니다.`,
+        });
       })
       .catch((error) => {
         console.group('멜론 검색 에러');
         console.error(error);
         console.groupEnd();
+
+        notification.error({
+          message: '멜론 검색 에러',
+          // 주의: 유저 친화적인 에러 메세지는 아닙니다.
+          description: JSON.stringify(error),
+        });
       });
   };
 
@@ -73,9 +85,20 @@ function MelonSearch() {
           <List.Item>
             <List.Item.Meta
               avatar={<Avatar src={item.ALBUMIMG} />}
-              title={<h6>{item.SONGNAME}</h6>}
               description={item.ARTISTNAME}
             />
+            <Typography.Text
+              onClick={() => {
+                console.log(`clicked ${JSON.stringify(item)}`);
+              }}
+            >
+              <a
+                href={`https://www.melon.com/song/detail.htm?songId=${item.SONGID}`}
+                target={'_blank'}
+              >
+                {item.SONGNAME}
+              </a>
+            </Typography.Text>
           </List.Item>
         )}
       />
