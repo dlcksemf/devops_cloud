@@ -6,7 +6,7 @@ import {
   faEnvelope,
   faStickyNote,
 } from "@fortawesome/free-solid-svg-icons";
-import profileImage from "./member1.jpg";
+import profileImage from "../image/member1.jpg";
 
 function ProfileCard({ name, role, email, facebook_url, changeUserPage }) {
   return (
@@ -30,7 +30,7 @@ function ProfileCard({ name, role, email, facebook_url, changeUserPage }) {
         </a>
         <ul className="contact">
           <li>
-            <FontAwesomeIcon icon={faFacebook} />{" "}
+            <FontAwesomeIcon className="icon" icon={faFacebook} />{" "}
             <span>
               <a href={facebook_url} target={"_blank"}>
                 Visit My Facebook page.
@@ -43,7 +43,7 @@ function ProfileCard({ name, role, email, facebook_url, changeUserPage }) {
           </li>
         </ul>
       </article>
-      <nav class="others">
+      <nav className="others">
         <a onClick={() => changeUserPage("user1")}></a>
         <a onClick={() => changeUserPage("user2")}></a>
         <a onClick={() => changeUserPage("user3")}></a>

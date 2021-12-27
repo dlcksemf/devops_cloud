@@ -107,7 +107,7 @@ section ul.contact li:last-child {
   border-bottom: none;
 }
 
-section ul.contact li i {
+section ul.contact li icon {
   width: 20%;
   text-align: center;
   color: #555;

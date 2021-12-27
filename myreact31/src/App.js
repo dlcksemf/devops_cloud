@@ -2,7 +2,7 @@ import "./App.css";
 import PageLotto from "./pages/PageLotto";
 import ProfileCard from "./components/ProfileCard";
 import { useState } from "react";
-import userList from "./userInfo.json";
+import userList from "./data/userInfo.json";
 
 function App() {
   const [userNum, setUserNum] = useState("user1");
