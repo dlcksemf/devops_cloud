@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import PageLotto from "./pages/PageLotto";
+import ProfileCard from "./components/ProfileCard";
+import { useState } from "react";
+import userList from "./userInfo.json";
 
 function App() {
+  const [userNum, setUserNum] = useState("user1");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {userList.map((user) => {
+        if (userNum === user.user) {
+          return (
+            <ProfileCard
+              name={user.name}
+              role={user.role}
+              email={user.email}
+              facebook_url={user.facebook_url}
+              changeUserPage={setUserNum}
+            />
+          );
+        }
+      })}
+      <PageLotto />
+    </>
   );
 }
 
