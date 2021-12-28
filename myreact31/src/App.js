@@ -9,19 +9,11 @@ function App() {
 
   return (
     <>
-      {userList.map((user) => {
-        if (userNum === user.user) {
-          return (
-            <ProfileCard
-              name={user.name}
-              role={user.role}
-              email={user.email}
-              facebook_url={user.facebook_url}
-              changeUserPage={setUserNum}
-            />
-          );
-        }
-      })}
+      {userList
+        .filter(({ user }) => userNum === user)
+        .map((user) => {
+          return <ProfileCard {...user} changeUserPage={setUserNum} />;
+        })}
       <PageLotto />
     </>
   );
