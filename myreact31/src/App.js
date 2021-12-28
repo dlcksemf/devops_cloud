@@ -5,15 +5,22 @@ import { useState } from "react";
 import userList from "./data/userInfo.json";
 
 function App() {
-  const [userNum, setUserNum] = useState("user1");
+  const [userId, setUserId] = useState("user1");
 
   return (
     <>
-      {userList
-        .filter(({ user }) => userNum === user)
-        .map((user) => {
-          return <ProfileCard {...user} changeUserPage={setUserNum} />;
-        })}
+      {userList.map((user, index) => {
+        const className = `user${(index % 4) + 1}`;
+        if (userId === user.userid) {
+          return (
+            <ProfileCard
+              {...user}
+              className={className}
+              changeUserPage={setUserId}
+            />
+          );
+        }
+      })}
       <PageLotto />
     </>
   );

@@ -1,27 +1,27 @@
 [
   {
-    "user": "user1",
+    "userid": "user1",
     "name": "DCOELAB",
     "role": "UI/UX INTERACTIVE DEVELOPER",
     "facebook_url": "https://www.facebook.com/rainygirl",
     "email": "hadaboni80@naver.com"
   },
   {
-    "user": "user2",
+    "userid": "user2",
     "name": "USER2",
     "role": "python",
     "facebook_url": "https://www.facebook.com/groups/python",
     "email": "abcd@naver.com"
   },
   {
-    "user": "user3",
+    "userid": "user3",
     "name": "USER3",
     "role": "django",
     "facebook_url": "https://www.facebook.com/groups/djangodevelopersnetwork",
     "email": "1234@naver.com"
   },
   {
-    "user": "user4",
+    "userid": "user4",
     "name": "HI THERE",
     "role": "react",
     "facebook_url": "https://www.facebook.com/react/",
