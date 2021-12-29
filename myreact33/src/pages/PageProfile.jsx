@@ -21,11 +21,29 @@ function PageProfile() {
       });
   }, []);
 
+  const handleRefresh = () => {
+    Axios.get(
+      'https://classdevopscloud.blob.core.windows.net/data/profile-list.json',
+    )
+      .then((response) => {
+        const profileList = response.data.map((profile) => ({
+          ...profile,
+          profileImageUrl: profile.profile_image_url,
+          instagramUrl: profile.instagram_url,
+        }));
+        setProfileList(profileList);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div>
       <h2>Page Profile</h2>
 
       <button onClick={() => setProfileList([])}>Clear</button>
+      <button onClick={handleRefresh}>Refresh</button>
 
       {profileList.length === 0 && <h3>등록된 프로필이 없습니다.</h3>}
 
