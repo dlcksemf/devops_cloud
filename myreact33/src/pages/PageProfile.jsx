@@ -41,13 +41,7 @@ function PageProfile() {
         setProfileList(
           profileData.filter((profile) => {
             const data = Object.values(profile);
-            let state = '';
-            for (const info of data) {
-              if (info.includes(query)) {
-                state = 'true';
-              }
-            }
-            return state === 'true' ? true : false;
+            return data.some((info) => info.includes(query));
           }),
         );
     }
