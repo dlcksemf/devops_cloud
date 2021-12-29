@@ -26,7 +26,7 @@ function PageProfile() {
   };
 
   useEffect(() => {
-    // handleRefresh();
+    profileData.length === 0 && handleRefresh();
     setProfileList(profileData);
   }, [profileData]);
 
@@ -39,10 +39,9 @@ function PageProfile() {
     if (e.key === 'Enter') {
       query &&
         setProfileList(
-          profileData.filter((profile) => {
-            const data = Object.values(profile);
-            return data.some((info) => info.includes(query));
-          }),
+          profileData.filter((profile) =>
+            Object.values(profile).some((info) => info.includes(query)),
+          ),
         );
     }
   };
