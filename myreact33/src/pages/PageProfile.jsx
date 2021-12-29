@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Axios from 'axios';
 
 function PageProfile() {
-  const [profileList, setProfileList] = useState([
-    {
-      uniqueId: 'bts-jin',
-      name: '진',
-      role: '서브보컬',
-      mbti: 'INFP',
-      instagramUrl: 'https://instagram.com/jin',
-      profileImageUrl:
-        'https://classdevopscloud.blob.core.windows.net/data/bts-jin.jpg',
-    },
-  ]);
+  const [profileList, setProfileList] = useState([]);
+
+  useEffect(
+    () =>
+      Axios.get(
+        'https://classdevopscloud.blob.core.windows.net/data/profile-list.json',
+      )
+        .then((response) => {
+          setProfileList(response.data);
+        })
+        .catch((error) => console.error(error)),
+    [],
+  );
 
   return (
     <div>
@@ -23,12 +26,12 @@ function PageProfile() {
           <>
             <h3>{member.name}</h3>
 
-            <img src={member.profileImageUrl} alt="" />
+            <img src={member.profile_image_url} alt="" />
 
             <ul>
               <li>{member.role}</li>
               <li>{member.mbti}</li>
-              <li>{member.instagramUrl}</li>
+              <li>{member.instagram_url}</li>
             </ul>
           </>
         );
