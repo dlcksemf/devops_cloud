@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import Axios from 'axios';
 
 function PageProfile() {
-  const [profileList, setProfileList] = useState([]);
+  const [profileData, setProfileData] = useState([]);
   const [checkedError, setCheckedError] = useState(null);
+  const [query, setQuery] = useState(null);
+  const [profileList, setProfileList] = useState([]);
 
   const handleRefresh = () => {
     setCheckedError(null);
     Axios.get(
-      'https://classdevopscloud.bb.core.windows.net/data/profile-list.json',
+      'https://classdevopscloud.blob.core.windows.net/data/profile-list.json',
     )
       .then((response) => {
         const profileList = response.data.map((profile) => ({
@@ -16,7 +18,7 @@ function PageProfile() {
           profileImageUrl: profile.profile_image_url,
           instagramUrl: profile.instagram_url,
         }));
-        setProfileList(profileList);
+        setProfileData(profileList);
       })
       .catch((error) => {
         setCheckedError(error);
@@ -24,8 +26,32 @@ function PageProfile() {
   };
 
   useEffect(() => {
-    handleRefresh();
-  }, []);
+    // handleRefresh();
+    setProfileList(profileData);
+  }, [profileData]);
+
+  const handleKeyChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      query &&
+        setProfileList(
+          profileData.filter((profile) => {
+            const data = Object.values(profile);
+            let state = '';
+            for (const info of data) {
+              if (info.includes(query)) {
+                state = 'true';
+              }
+            }
+            return state === 'true' ? true : false;
+          }),
+        );
+    }
+  };
 
   return (
     <div>
@@ -37,6 +63,14 @@ function PageProfile() {
 
       <button onClick={() => setProfileList([])}>Clear</button>
       <button onClick={handleRefresh}>Refresh</button>
+
+      <hr />
+      <input
+        type="text"
+        placeholder="검색어를 입력해주세요!"
+        onChange={handleKeyChange}
+        onKeyPress={handleKeyPress}
+      />
 
       {profileList.length === 0 && <h3>등록된 프로필이 없습니다.</h3>}
 
