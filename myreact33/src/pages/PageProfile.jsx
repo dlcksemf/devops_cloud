@@ -25,6 +25,8 @@ function PageProfile() {
     <div>
       <h2>Page Profile</h2>
 
+      <button onClick={() => setProfileList([])}>Clear</button>
+
       {profileList.length === 0 && <h3>등록된 프로필이 없습니다.</h3>}
 
       {profileList.map((member) => {
