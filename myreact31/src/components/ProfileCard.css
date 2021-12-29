@@ -18,19 +18,19 @@ div {
   padding: 50px;
 }
 
-.user1 {
+.bts-jin {
   background-color: #ebfaff;
 }
 
-.user2 {
+.bts-suga {
   background-color: #edffeb;
 }
 
-.user3 {
+.bts-j-hope {
   background-color: #fff3fd;
 }
 
-.user4 {
+.bts-rm {
   background-color: #f5f0ff;
 }
 
@@ -67,26 +67,45 @@ section article.profile {
   text-align: center;
 }
 
-section article.profile img {
+/* section article.profile img {
   width: 200px;
   height: 200px;
   border-radius: 50%;
   margin-bottom: 20px;
+} */
+
+section article.profile div.image-cropper {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: auto;
+  margin-bottom: 20px;
+  padding: 2px;
 }
 
-.user1 img {
+section article.profile div img {
+  display: inline;
+  margin: 0 auto;
+  margin-left: -25%;
+  height: 100%;
+  width: auto;
+}
+
+.bts-jin img {
   box-shadow: 5px 15px 30px rgba(173, 216, 230, 0.8);
 }
 
-.user2 img {
+.bts-suga img {
   box-shadow: 5px 15px 20px #bdccb783;
 }
 
-.user3 img {
+.bts-j-hope img {
   box-shadow: 5px 15px 20px rgba(252, 99, 214, 0.2);
 }
 
-.user4 img {
+.bts-rm img {
   box-shadow: 5px 15px 20px rgba(183, 82, 250, 0.2);
 }
 
@@ -122,22 +141,22 @@ section a.btnView {
   text-align: center;
 }
 
-.user1 .btnView {
+.bts-jin .btnView {
   background: linear-gradient(45deg, #4affff, #35e0f7);
   box-shadow: 5px 10px 20px rgba(0, 255, 255, 0.493);
 }
 
-.user2 .btnView {
+.bts-suga .btnView {
   background: linear-gradient(45deg, #a0ff9d, #55f5b2);
   box-shadow: 5px 10px 20px rgba(33, 250, 105, 0.3);
 }
 
-.user3 .btnView {
+.bts-j-hope .btnView {
   background: linear-gradient(45deg, #ef74ff, #ff11c4);
   box-shadow: 5px 10px 20px rgba(255, 17, 196, 0.357);
 }
 
-.user4 .btnView {
+.bts-rm .btnView {
   background: linear-gradient(45deg, #8e74ff, #a011ff);
   box-shadow: 5px 10px 20px rgba(160, 17, 255, 0.4);
 }
@@ -210,4 +229,24 @@ section nav.others a:nth-of-type(3) {
 section nav.others a:nth-of-type(4) {
   background-color: #a794fd;
   box-shadow: 5px 5px 10px rgba(167, 148, 253, 0.7);
+}
+
+section nav.others a:nth-of-type(5) {
+  background-color: #35e0f7;
+  box-shadow: 5px 5px 10px rgba(74, 255, 255, 0.7);
+}
+
+section nav.others a:nth-of-type(6) {
+  background-color: #55f5cd;
+  box-shadow: 5px 5px 10px rgba(85, 245, 178, 0.7);
+}
+
+section nav.others a:nth-of-type(7) {
+  background-color: #ff80df;
+  box-shadow: 5px 5px 10px rgba(255, 128, 223, 0.7);
+}
+
+section nav.others a.on {
+  opacity: 1;
+  filter: saturate(1);
 }

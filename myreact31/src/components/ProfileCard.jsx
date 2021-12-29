@@ -1,6 +1,6 @@
 import "./ProfileCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import {
   faBars,
   faEnvelope,
@@ -8,11 +8,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function ProfileCard({
-  userid,
   name,
   role,
-  email,
-  facebook_url,
+  mbti,
+  instagram_url,
+  profile_image_url,
   children,
   className,
 }) {
@@ -28,26 +28,25 @@ function ProfileCard({
           </a>
         </nav>
         <article className="profile">
-          <img src={`/profile-images/${userid}.jpg`} alt="프로필 이미지" />
+          <div className="image-cropper">
+            <img src={profile_image_url} alt="프로필 이미지" />
+          </div>
 
           <h1>{name}</h1>
           <h2>{role}</h2>
+          <h2>{mbti}</h2>
 
           <a href="#" className="btnView">
             VIEW MORE
           </a>
           <ul className="contact">
             <li>
-              <FontAwesomeIcon icon={faFacebook} />
+              <FontAwesomeIcon icon={faInstagram} />
               <span>
-                <a href={facebook_url} target={"_blank"}>
-                  Visit My Facebook page.
+                <a href={instagram_url} target={"_blank"}>
+                  Visit My Instagram page.
                 </a>
               </span>
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faEnvelope} />
-              <span>{email}</span>
             </li>
           </ul>
         </article>
