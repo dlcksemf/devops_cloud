@@ -3,27 +3,12 @@ import Axios from 'axios';
 
 function PageProfile() {
   const [profileList, setProfileList] = useState([]);
-
-  useEffect(() => {
-    Axios.get(
-      'https://classdevopscloud.blob.core.windows.net/data/profile-list.json',
-    )
-      .then((response) => {
-        const profileList = response.data.map((profile) => ({
-          ...profile,
-          profileImageUrl: profile.profile_image_url,
-          instagramUrl: profile.instagram_url,
-        }));
-        setProfileList(profileList);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const [checkedError, setCheckedError] = useState(null);
 
   const handleRefresh = () => {
+    setCheckedError(null);
     Axios.get(
-      'https://classdevopscloud.blob.core.windows.net/data/profile-list.json',
+      'https://classdevopscloud.bb.core.windows.net/data/profile-list.json',
     )
       .then((response) => {
         const profileList = response.data.map((profile) => ({
@@ -34,13 +19,21 @@ function PageProfile() {
         setProfileList(profileList);
       })
       .catch((error) => {
-        console.error(error);
+        setCheckedError(error);
       });
   };
+
+  useEffect(() => {
+    handleRefresh();
+  }, []);
 
   return (
     <div>
       <h2>Page Profile</h2>
+
+      {checkedError && `Error Message: ${checkedError.message}`}
+
+      <hr />
 
       <button onClick={() => setProfileList([])}>Clear</button>
       <button onClick={handleRefresh}>Refresh</button>
