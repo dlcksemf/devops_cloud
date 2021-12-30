@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
+import './PageProfile.css';
+import ProfileList from 'components/ProfileList';
 
 function PageProfile() {
   const [profileData, setProfileData] = useState([]);
@@ -26,7 +28,10 @@ function PageProfile() {
   };
 
   useEffect(() => {
-    profileData.length === 0 && handleRefresh();
+    handleRefresh();
+  }, []);
+
+  useEffect(() => {
     setProfileList(profileData);
   }, [profileData]);
 
@@ -47,41 +52,22 @@ function PageProfile() {
   };
 
   return (
-    <div>
-      <h2>Page Profile</h2>
-
+    <div className="page-profile">
       {checkedError && `Error Message: ${checkedError.message}`}
 
       <hr />
 
       <button onClick={() => setProfileList([])}>Clear</button>
       <button onClick={handleRefresh}>Refresh</button>
-
-      <hr />
-      <input
-        type="text"
-        placeholder="검색어를 입력해주세요!"
-        onChange={handleKeyChange}
-        onKeyPress={handleKeyPress}
-      />
-
-      {profileList.length === 0 && <h3>등록된 프로필이 없습니다.</h3>}
-
-      {profileList.map((member) => {
-        return (
-          <div key={member.unique_id}>
-            <h3>{member.name}</h3>
-
-            <img src={member.profileImageUrl} alt="" />
-
-            <ul>
-              <li>{member.role}</li>
-              <li>{member.mbti}</li>
-              <li>{member.instagramUrl}</li>
-            </ul>
-          </div>
-        );
-      })}
+      <div>
+        <input
+          type="text"
+          placeholder="검색어를 입력해주세요!"
+          onChange={handleKeyChange}
+          onKeyPress={handleKeyPress}
+        />
+      </div>
+      <ProfileList profileList={profileList} />
     </div>
   );
 }
