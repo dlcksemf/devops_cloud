@@ -41,18 +41,15 @@ function PageProfile() {
   };
 
   const handleKeyPress = (e) => {
-    // regexp - i(ignore case)
-
     if (e.key === 'Enter') {
       setProfileList(
-        profileData.filter(({ name, role, mbti }) => {
-          if (query.length === 0) {
-            return true;
-          }
-          const pattern = new RegExp(query, 'i');
-          const queryTarget = [name, role, mbti];
-          return pattern.test(queryTarget);
-        }),
+        query
+          ? profileData.filter(({ name, role, mbti }) => {
+              const pattern = new RegExp(query, 'i');
+              const queryTarget = [name, role, mbti];
+              return pattern.test(queryTarget);
+            })
+          : profileData,
       );
     }
   };
