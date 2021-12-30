@@ -27,20 +27,17 @@ function App() {
   return (
     <>
       {profileList.map((user, index) => {
-        const className = profileList[index % 4].unique_id;
+        const className = `user${(index % 4) + 1}`;
 
         if (selectedUserId === user.unique_id) {
           return (
-            <ProfileCard {...user} className={className}>
-              {profileList.map(({ unique_id }) => {
-                return (
-                  <a
-                    onClick={() => setSelectedUserId(unique_id)}
-                    className={selectedUserId === unique_id ? "on" : ""}
-                  ></a>
-                );
-              })}
-            </ProfileCard>
+            <ProfileCard
+              {...user}
+              className={className}
+              profileList={profileList}
+              setSelectedUserId={setSelectedUserId}
+              selectedUserId={selectedUserId}
+            />
           );
         }
       })}

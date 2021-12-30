@@ -1,11 +1,7 @@
 import "./ProfileCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import {
-  faBars,
-  faEnvelope,
-  faStickyNote,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faStickyNote } from "@fortawesome/free-solid-svg-icons";
 
 function ProfileCard({
   name,
@@ -13,8 +9,10 @@ function ProfileCard({
   mbti,
   instagram_url,
   profile_image_url,
-  children,
   className,
+  profileList,
+  setSelectedUserId,
+  selectedUserId,
 }) {
   return (
     <div className={className}>
@@ -50,7 +48,18 @@ function ProfileCard({
             </li>
           </ul>
         </article>
-        <nav className="others">{children}</nav>
+        <nav className="others">
+          {profileList.map(({ unique_id }, index) => {
+            return (
+              <a
+                onClick={() => setSelectedUserId(unique_id)}
+                className={`user${(index % 4) + 1} ${
+                  selectedUserId === unique_id ? "on" : ""
+                }`}
+              ></a>
+            );
+          })}
+        </nav>
       </section>
     </div>
   );
