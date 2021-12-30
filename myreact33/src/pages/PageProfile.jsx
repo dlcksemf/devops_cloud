@@ -44,21 +44,26 @@ function PageProfile() {
     // regexp - i(ignore case)
 
     if (e.key === 'Enter') {
-      query
-        ? setProfileList(
-            profileData.filter((member) => {
-              const pattern = new RegExp(query, 'i');
-              const queryTarget = [member.name, member.role, member.mbti];
-              return pattern.test(queryTarget);
-            }),
-          )
-        : handleRefresh();
+      setProfileList(
+        profileData.filter(({ name, role, mbti }) => {
+          if (query.length === 0) {
+            return true;
+          }
+          const pattern = new RegExp(query, 'i');
+          const queryTarget = [name, role, mbti];
+          return pattern.test(queryTarget);
+        }),
+      );
     }
   };
 
   return (
     <div className="page-profile">
       {checkedError && `Error Message: ${checkedError.message}`}
+
+      {profileList.length === 0 && !checkedError && (
+        <h3>등록된 프로필이 없습니다.</h3>
+      )}
 
       <hr />
 
