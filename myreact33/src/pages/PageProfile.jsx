@@ -41,13 +41,18 @@ function PageProfile() {
   };
 
   const handleKeyPress = (e) => {
+    // regexp - i(ignore case)
+
     if (e.key === 'Enter') {
-      query &&
-        setProfileList(
-          profileData.filter((profile) =>
-            Object.values(profile).some((info) => info.includes(query)),
-          ),
-        );
+      query
+        ? setProfileList(
+            profileData.filter((member) => {
+              const pattern = new RegExp(query, 'i');
+              const queryTarget = [member.name, member.role, member.mbti];
+              return pattern.test(queryTarget);
+            }),
+          )
+        : handleRefresh();
     }
   };
 
