@@ -1,10 +1,7 @@
-import { useState } from "react";
-import Counter from "./Counter";
+import SevenNumbers from './SevenNumbers';
 
 function App() {
-  return (
-    <Counter initialValue={10} />
-  );
+  return <SevenNumbers />;
 }
 
 export default App;
