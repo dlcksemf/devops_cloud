@@ -6,6 +6,11 @@ function reducer(state, action) {
   switch (action.type) {
     case 'GENERATE_NUMBERS':
       return { ...state, numbers: randomNumbers() };
+    case 'SHUFFLE_NUMBERS':
+      return {
+        ...state,
+        numbers: state.numbers.sort(() => Math.random() - Math.random()),
+      };
     default:
       return state;
   }
@@ -37,6 +42,10 @@ function SevenNumbers() {
     dispatch({ type: 'GENERATE_NUMBERS' });
   };
 
+  const shuffleNumbers = () => {
+    dispatch({ type: 'SHUFFLE_NUMBERS' });
+  };
+
   return (
     <>
       <h2>Seven Numbers</h2>
@@ -48,6 +57,7 @@ function SevenNumbers() {
       })}
 
       <button onClick={generateNumbers}>GENERATE NUMBERS</button>
+      <button onClick={shuffleNumbers}>SHUFFLE NUMBERS</button>
     </>
   );
 }
