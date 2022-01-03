@@ -2,9 +2,12 @@ import { useReducer } from 'react';
 
 const range = (size) => [...Array(size).keys()];
 
+function shuffleArray(array) {
+  return array.sort(() => Math.random() - Math.random());
+}
+
 function randomNumbers() {
-  const random_numbers = range(45)
-    .sort(() => Math.random() - Math.random())
+  const random_numbers = shuffleArray(range(45))
     .map((number) => number + 1)
     .slice(0, 7);
   return random_numbers;
@@ -17,12 +20,12 @@ function reducer(state, action) {
     case 'SHUFFLE_NUMBERS':
       return {
         ...state,
-        numbers: state.numbers.sort(() => Math.random() - Math.random()),
+        numbers: shuffleArray(state.numbers),
       };
     case 'SHUFFLE_COLORS':
       return {
         ...state,
-        colors: state.colors.sort(() => Math.random() - Math.random()),
+        colors: shuffleArray(state.colors),
       };
     default:
       return state;
