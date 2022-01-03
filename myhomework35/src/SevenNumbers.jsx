@@ -11,6 +11,11 @@ function reducer(state, action) {
         ...state,
         numbers: state.numbers.sort(() => Math.random() - Math.random()),
       };
+    case 'SHUFFLE_COLORS':
+      return {
+        ...state,
+        colors: state.colors.sort(() => Math.random() - Math.random()),
+      };
     default:
       return state;
   }
@@ -46,18 +51,33 @@ function SevenNumbers() {
     dispatch({ type: 'SHUFFLE_NUMBERS' });
   };
 
+  const shuffleColors = () => {
+    dispatch({ type: 'SHUFFLE_COLORS' });
+  };
+
   return (
     <>
       <h2>Seven Numbers</h2>
 
-      {state.numbers.map((number) => {
+      {state.numbers.map((number, index) => {
         return (
-          <div style={{ display: 'inline-block', margin: '5px' }}>{number}</div>
+          <div
+            style={{
+              display: 'inline-block',
+              margin: '5px',
+              backgroundColor: state.colors[index],
+            }}
+          >
+            {number}
+          </div>
         );
       })}
 
+      <hr />
+
       <button onClick={generateNumbers}>GENERATE NUMBERS</button>
       <button onClick={shuffleNumbers}>SHUFFLE NUMBERS</button>
+      <button onClick={shuffleColors}>SHUFFLE COLORS</button>
     </>
   );
 }
