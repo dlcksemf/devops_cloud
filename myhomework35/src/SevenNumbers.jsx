@@ -2,6 +2,14 @@ import { useReducer } from 'react';
 
 const range = (size) => [...Array(size).keys()];
 
+function randomNumbers() {
+  const random_numbers = range(45)
+    .sort(() => Math.random() - Math.random())
+    .map((number) => number + 1)
+    .slice(0, 7);
+  return random_numbers;
+}
+
 function reducer(state, action) {
   switch (action.type) {
     case 'GENERATE_NUMBERS':
@@ -19,14 +27,6 @@ function reducer(state, action) {
     default:
       return state;
   }
-}
-
-function randomNumbers() {
-  const random_numbers = range(45)
-    .sort(() => Math.random() - Math.random())
-    .map((number) => number + 1)
-    .slice(0, 7);
-  return random_numbers;
 }
 
 function SevenNumbers() {
@@ -63,8 +63,7 @@ function SevenNumbers() {
         return (
           <div
             style={{
-              display: 'inline-block',
-              margin: '5px',
+              ...defaultStyle,
               backgroundColor: state.colors[index],
             }}
           >
@@ -81,5 +80,17 @@ function SevenNumbers() {
     </>
   );
 }
+
+const defaultStyle = {
+  width: '100px',
+  height: '100px',
+  borderRadius: '50px',
+  lineHeight: '100px',
+  textAlign: 'center',
+  display: 'inline-block',
+  fontSize: '3rem',
+  userSelect: 'none',
+  margin: '1rem',
+};
 
 export default SevenNumbers;
