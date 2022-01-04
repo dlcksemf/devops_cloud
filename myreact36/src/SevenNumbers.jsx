@@ -3,7 +3,7 @@ import { useReducer } from 'react';
 import { shuffle_array, zip } from 'utils';
 
 const INITIAL_STATE = {
-  numbers: [], //0, 0, 0, 0, 0, 0, 0],
+  numbers: [], //[0, 0, 0, 0, 0, 0, 0],
   colors: [
     '#1B62BF',
     '#1755A6',
@@ -59,13 +59,12 @@ function reducer(prevState, action) {
       }),
     };
   } else if (type === ACTION_TYPES.DELETE_CIRCLE) {
+    const filtered_list = zip(prevState.numbers, prevState.colors).filter(
+      ([number, color], index) => index !== action.payload.index,
+    );
     return {
-      numbers: prevState.numbers.filter((state) => {
-        return prevState.numbers.indexOf(state) !== action.payload.index;
-      }),
-      colors: prevState.colors.filter((state) => {
-        return prevState.colors.indexOf(state) !== action.payload.index;
-      }),
+      numbers: filtered_list.map(([number, color]) => number),
+      colors: filtered_list.map(([number, color]) => color),
     };
   }
   return prevState;
