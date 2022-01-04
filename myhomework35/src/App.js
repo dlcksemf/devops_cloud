@@ -1,4 +1,4 @@
-import SevenNumbers from './SevenNumbers';
+import SevenNumbers from './SevenNumbers.jsx';
 
 function App() {
   return <SevenNumbers />;
