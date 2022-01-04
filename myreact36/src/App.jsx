@@ -1,9 +1,9 @@
-import SevenNumbers2 from 'SevenNumbers2';
+import SevenNumbers from 'SevenNumbers';
 
 function App() {
   return (
     <div>
-      <SevenNumbers2 />
+      <SevenNumbers />
     </div>
   );
 }

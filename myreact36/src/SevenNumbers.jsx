@@ -3,7 +3,7 @@ import { useReducer } from 'react';
 import { shuffle_array, zip } from 'utils';
 
 const INITIAL_STATE = {
-  numbers: [0, 0, 0, 0, 0, 0, 0],
+  numbers: [], //0, 0, 0, 0, 0, 0, 0],
   colors: [
     '#1B62BF',
     '#1755A6',
@@ -26,6 +26,8 @@ const ACTION_TYPES = {
   GENERATE_NUMBERS: 'GENERATE_NUMBERS',
   SHUFFLE_NUMBERS: 'SHUFFLE_NUMBERS',
   SHUFFLE_COLORS: 'SHUFFLE_COLORS',
+  CHANGE_COLORS: 'CHANGE_COLORS',
+  DELETE_CIRCLE: 'DELETE_CIRCLE',
 };
 
 function reducer(prevState, action) {
@@ -46,8 +48,26 @@ function reducer(prevState, action) {
       ...prevState,
       colors: shuffle_array(prevState.colors),
     };
+  } else if (type === ACTION_TYPES.CHANGE_COLORS) {
+    return {
+      ...prevState,
+      colors: prevState.colors.map((state) => {
+        if (prevState.colors.indexOf(state) === action.payload.index) {
+          return `#${Math.round(Math.random() * 0xffffff).toString(16)}`;
+        }
+        return state;
+      }),
+    };
+  } else if (type === ACTION_TYPES.DELETE_CIRCLE) {
+    return {
+      numbers: prevState.numbers.filter((state) => {
+        return prevState.numbers.indexOf(state) !== action.payload.index;
+      }),
+      colors: prevState.colors.filter((state) => {
+        return prevState.colors.indexOf(state) !== action.payload.index;
+      }),
+    };
   }
-
   return prevState;
 }
 
@@ -69,16 +89,37 @@ function SevenNumbers2() {
     dispatch(action);
   };
 
+  const changeColor = (index) => {
+    const action = {
+      type: ACTION_TYPES.CHANGE_COLORS,
+      payload: { index: index },
+    };
+    dispatch(action);
+  };
+
+  const removeCircle = (index) => {
+    const action = {
+      type: ACTION_TYPES.DELETE_CIRCLE,
+      payload: { index: index },
+    };
+    dispatch(action);
+  };
+
   return (
     <div>
-      {zip(state.numbers, state.colors).map(([number, color]) => (
-        <Circle
-          number={number}
-          backgroundColor={color}
-          onClick={() => console.log('clicked')}
-          onContextMenu={() => console.log('right clicked')}
-        />
-      ))}
+      {zip(state.numbers, state.colors).map(
+        ([number, backgroundColor], index) => (
+          <Circle
+            number={number}
+            backgroundColor={backgroundColor}
+            onClick={() => changeColor(index)}
+            onContextMenu={(e) => {
+              e.preventDefault();
+              removeCircle(index);
+            }}
+          />
+        ),
+      )}
       <hr />
       <button onClick={generateNumbers}>GENERATE_NUMBERS</button>
       <button onClick={shuffleNumbers}>SHUFFLE_NUMBERS</button>
