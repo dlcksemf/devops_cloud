@@ -5,9 +5,9 @@ import TodoForm from './TodoForm';
 import './TodoList.css';
 
 const INITIAL_STATE = [
-  { content: '2002', state: false },
-  { content: '03', state: false },
-  { content: '25', state: false },
+  { content: '2002', state: false, color: 'blue' },
+  { content: '03', state: false, color: 'orange' },
+  { content: '25', state: false, color: 'orange' },
 ];
 
 function TodoList() {
@@ -23,22 +23,6 @@ function TodoList() {
     );
   };
 
-  //   const changedInputText = (e) => {
-  //     setInputText(e.target.value);
-  //   };
-
-  //   const appendInputText = (e) => {
-  //     if (e.key === 'Enter') {
-  //       // todoList 배열 끝에 inputText를 추가합니다.
-  //       // inputText를 다시 비웁니다. => input 박스 UI가 비워보이진 않을거에요. => value={inputText}
-  //       setTodoList((prevValue) => [
-  //         ...prevValue,
-  //         { content: inputText, state: false },
-  //       ]);
-  //       setInputText('');
-  //     }
-  //   };
-
   const changeState = (todoIndex) => {
     setTodoList((prevTodoList) =>
       prevTodoList.map((todo, index) => {
@@ -50,11 +34,21 @@ function TodoList() {
     );
   };
 
+  const appendTodo = () => {
+    const todo = { ...fieldValues };
+    setTodoList((prevTodoList) => [...prevTodoList, todo]);
+    clearFieldValues();
+  };
+
   return (
     <div className="todo-list">
       <h2>Todo List</h2>
 
-      <TodoForm handleChange={handleChange} fieldValues={fieldValues} />
+      <TodoForm
+        handleSubmit={appendTodo}
+        handleChange={handleChange}
+        fieldValues={fieldValues}
+      />
       <hr />
       {JSON.stringify(fieldValues)}
 
@@ -64,13 +58,6 @@ function TodoList() {
       >
         clear
       </button>
-
-      {/* <input
-        type="text"
-        value={inputText}
-        onChange={changedInputText}
-        onKeyPress={appendInputText}
-      /> */}
 
       {todoList.map((todo, index) => (
         <Todo

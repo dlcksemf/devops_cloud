@@ -9,10 +9,10 @@ function useFieldValues(initialValues) {
     const { name, value } = e.target;
 
     // setter에 값 지정
-    setFieldValues({
-      ...fieldValues,
-      [name]: value,
-    });
+    // setFieldValues({
+    //   ...fieldValues,
+    //   [name]: value,
+    // });
 
     // setter에 함수 지정
     setFieldValues((prevFieldValues) => ({
