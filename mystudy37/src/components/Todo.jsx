@@ -1,8 +1,12 @@
 function Todo({ todo, onClick }) {
   return (
-    <>
-      <h2 onClick={onClick}>{todo.content}</h2>
-    </>
+    <div
+      className={`m-1 p-1 rounded-2xl text-lg hover:scale-105 cursor-pointer`}
+      style={{ background: todo.color }}
+      onClick={onClick}
+    >
+      <h2>{todo.content}</h2>
+    </div>
   );
 }
 
