@@ -51,20 +51,20 @@ function reducer(prevState, action) {
   } else if (type === ACTION_TYPES.CHANGE_COLORS) {
     return {
       ...prevState,
-      colors: prevState.colors.map((state) => {
-        if (prevState.colors.indexOf(state) === action.payload.index) {
+      colors: prevState.colors.map((number, index) => {
+        if (index === action.payload.index) {
           return `#${Math.round(Math.random() * 0xffffff).toString(16)}`;
         }
-        return state;
+        return number;
       }),
     };
   } else if (type === ACTION_TYPES.DELETE_CIRCLE) {
     const filtered_list = zip(prevState.numbers, prevState.colors).filter(
-      ([number, color], index) => index !== action.payload.index,
+      (_, index) => index !== action.payload.index,
     );
     return {
-      numbers: filtered_list.map(([number, color]) => number),
-      colors: filtered_list.map(([number, color]) => color),
+      numbers: filtered_list.map(([number]) => number),
+      colors: filtered_list.map(([, color]) => color),
     };
   }
   return prevState;
