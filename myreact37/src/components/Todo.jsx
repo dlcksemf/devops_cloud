@@ -5,7 +5,8 @@ function Todo({ todo, changeState, removeTodo }) {
     <>
       <div
         onClick={changeState}
-        className={`bg-${todo.color}-200 hover:bg-${todo.color}-400 m-1 p-1 rounded-2xl text-lg border-${todo.color}-200 border-2 hover:border-${todo.color}-500 hover:scale-105 cursor-pointer`}
+        className={`m-1 p-1 rounded-2xl text-lg hover:scale-105 cursor-pointer`}
+        style={{ background: todo.color }}
       >
         <span
           className="content select-none"
