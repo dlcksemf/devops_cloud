@@ -1,7 +1,7 @@
-function Todo() {
+function Todo({ todo, onClick }) {
   return (
     <>
-      <h2>Todo</h2>
+      <h2 onClick={onClick}>{todo.content}</h2>
     </>
   );
 }
