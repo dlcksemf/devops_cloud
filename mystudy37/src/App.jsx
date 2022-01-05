@@ -1,9 +1,10 @@
 import './App.css';
+import PageTodoList from 'pages/PageTodoList';
 
 function App() {
   return (
     <div>
-      <h2>hello</h2>
+      <PageTodoList />
     </div>
   );
 }
