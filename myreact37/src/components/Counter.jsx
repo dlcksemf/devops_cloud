@@ -1,17 +1,17 @@
 import { useReducer } from 'react';
 import './Counter.css';
 
-const ACTION_TYPE = {
-  CLICKED: 'CLICKED',
-  RIGHT_CLICKED: 'RIGHT_CLICKED',
+const ACTION_TYPES = {
+  INCREASE: 'INCREASE',
+  DECREASE: 'DECREASE',
 };
 
 function reducer(prevValue, action) {
   const { type } = action;
   switch (type) {
-    case ACTION_TYPE.CLICKED:
+    case ACTION_TYPES.INCREASE:
       return prevValue + 1;
-    case ACTION_TYPE.RIGHT_CLICKED:
+    case ACTION_TYPES.DECREASE:
       return prevValue - 1;
     default:
       return prevValue;
@@ -21,16 +21,14 @@ function reducer(prevValue, action) {
 function Counter() {
   const [value, dispatch] = useReducer(reducer, 0);
 
-  const handleMinus = () => dispatch({ type: ACTION_TYPE.RIGHT_CLICKED });
-
   return (
     <>
       <div
         className="Counter"
-        onClick={() => dispatch({ type: ACTION_TYPE.CLICKED })}
+        onClick={() => dispatch({ type: ACTION_TYPES.INCREASE })}
         onContextMenu={(e) => {
           e.preventDefault();
-          handleMinus();
+          dispatch({ type: ACTION_TYPES.DECREASE });
         }}
       >
         {value}
