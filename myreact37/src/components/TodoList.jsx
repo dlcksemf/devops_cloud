@@ -12,7 +12,10 @@ const INITIAL_STATE = [
 
 function TodoList() {
   const [todoList, setTodoList] = useState(INITIAL_STATE);
-  const [fieldValues, handleChange] = useFieldValues();
+  const [fieldValues, handleChange, clearFieldValues] = useFieldValues({
+    content: '',
+    color: 'orange',
+  });
 
   const removeTodo = (todoIndex) => {
     setTodoList((prevTodoList) =>
@@ -50,9 +53,17 @@ function TodoList() {
   return (
     <div className="todo-list">
       <h2>Todo List</h2>
+
+      <TodoForm handleChange={handleChange} fieldValues={fieldValues} />
+      <hr />
       {JSON.stringify(fieldValues)}
 
-      <TodoForm handleChange={handleChange} />
+      <button
+        onClick={() => clearFieldValues()}
+        className="bg-red-500 text-gray-100 cursor-pointer"
+      >
+        clear
+      </button>
 
       {/* <input
         type="text"
