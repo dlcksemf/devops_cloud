@@ -1,9 +1,10 @@
 import './App.css';
+import PageReviewList from 'pages/PageReviewList.jsx';
 
 function App() {
   return (
     <div>
-      <h2>hello</h2>
+      <PageReviewList />
     </div>
   );
 }
