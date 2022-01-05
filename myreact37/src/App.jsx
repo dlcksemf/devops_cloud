@@ -1,9 +1,10 @@
 import './App.css';
+import PageCounter from 'pages/PageCounter.jsx';
 
 function App() {
   return (
     <div>
-      <h2>Hello</h2>
+      <PageCounter />
     </div>
   );
 }
