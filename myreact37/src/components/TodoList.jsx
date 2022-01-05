@@ -1,14 +1,18 @@
+import useFieldValues from 'hooks/useFieldValues';
 import { useState } from 'react';
+import Todo from './Todo';
+import TodoForm from './TodoForm';
+import './TodoList.css';
 
 const INITIAL_STATE = [
-  { content: '2002' },
-  { content: '03' },
-  { content: '25' },
+  { content: '2002', state: false },
+  { content: '03', state: false },
+  { content: '25', state: false },
 ];
 
 function TodoList() {
-  const [inputText, setInputText] = useState('');
   const [todoList, setTodoList] = useState(INITIAL_STATE);
+  const [fieldValues, handleChange] = useFieldValues();
 
   const removeTodo = (todoIndex) => {
     setTodoList((prevTodoList) =>
@@ -16,40 +20,54 @@ function TodoList() {
     );
   };
 
-  const changedInputText = (e) => {
-    setInputText(e.target.value);
-  };
+  //   const changedInputText = (e) => {
+  //     setInputText(e.target.value);
+  //   };
 
-  const appendInputText = (e) => {
-    if (e.key === 'Enter') {
-      // todoList 배열 끝에 inputText를 추가합니다.
-      // inputText를 다시 비웁니다. => input 박스 UI가 비워보이진 않을거에요. => value={inputText}
-      setTodoList((prevValue) => [...prevValue, { content: inputText }]);
-      setInputText('');
-    }
+  //   const appendInputText = (e) => {
+  //     if (e.key === 'Enter') {
+  //       // todoList 배열 끝에 inputText를 추가합니다.
+  //       // inputText를 다시 비웁니다. => input 박스 UI가 비워보이진 않을거에요. => value={inputText}
+  //       setTodoList((prevValue) => [
+  //         ...prevValue,
+  //         { content: inputText, state: false },
+  //       ]);
+  //       setInputText('');
+  //     }
+  //   };
+
+  const changeState = (todoIndex) => {
+    setTodoList((prevTodoList) =>
+      prevTodoList.map((todo, index) => {
+        if (index === todoIndex) {
+          return { ...todo, state: !todo.state };
+        }
+        return todo;
+      }),
+    );
   };
 
   return (
-    <div>
+    <div className="todo-list">
       <h2>Todo List</h2>
+      {JSON.stringify(fieldValues)}
 
-      <input
+      <TodoForm handleChange={handleChange} />
+
+      {/* <input
         type="text"
         value={inputText}
         onChange={changedInputText}
         onKeyPress={appendInputText}
-      />
+      /> */}
 
-      <ul>
-        {todoList.map((todo, index) => (
-          <>
-            <li>
-              {todo.content}
-              <button onClick={() => removeTodo(index)}>Delete</button>
-            </li>
-          </>
-        ))}
-      </ul>
+      {todoList.map((todo, index) => (
+        <Todo
+          todo={todo}
+          changeState={() => changeState(index)}
+          removeTodo={() => removeTodo(index)}
+        />
+      ))}
     </div>
   );
 }
