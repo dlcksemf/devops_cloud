@@ -31,7 +31,7 @@ const INITIAL_VALUE = {
 
 const ACTION_TYPES = {
   DELETE_REVIEW: 'DELETE_REVIEW',
-  CHANGE_REVIEW: 'CHANGE_REVIEW',
+  EDIT_REVIEW: 'EDIT_REVIEW',
 };
 
 function reducer(reviewList, action) {
@@ -73,8 +73,9 @@ function ReviewList() {
     setReviewList((prevReviewList) => reducer(prevReviewList, action));
   };
 
-  const editReview = (index) => {
-    const action = { type: ACTION_TYPES.CHANGE_REVIEW, reviewIndex: index };
+  const editReview = ({ fieldValues: fieldValue, index: reviewIndex }) => {
+    console.log(fieldValue);
+    console.log(reviewIndex);
   };
 
   return (
@@ -122,7 +123,10 @@ function ReviewList() {
           review={review}
           type={reviewIconType}
           handleDelete={() => deleteReview(index)}
-          handleEdit={() => editReview(index)}
+          handleChange={handleChange}
+          fieldValues={fieldValues}
+          editReview={editReview}
+          index={index}
         />
       ))}
     </div>
