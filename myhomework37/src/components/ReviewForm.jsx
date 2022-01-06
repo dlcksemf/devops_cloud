@@ -1,4 +1,4 @@
-function ReviewForm({ handleSubmit, handleChange }) {
+function ReviewForm({ handleSubmit, handleChange, fieldValues }) {
   return (
     <div className="w-full max-w-xs my-8">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -12,6 +12,7 @@ function ReviewForm({ handleSubmit, handleChange }) {
             className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="star"
             type="star"
+            value={fieldValues.star}
           >
             <option>0</option>
             <option>1</option>
@@ -30,6 +31,7 @@ function ReviewForm({ handleSubmit, handleChange }) {
             id="review"
             name="review"
             onChange={handleChange}
+            value={fieldValues.review}
           />
         </div>
         <div className="flex items-center justify-between">

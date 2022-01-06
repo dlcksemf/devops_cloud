@@ -12,7 +12,7 @@ function useFieldValues(initialState) {
     setFieldValues(initialState);
   };
 
-  return [fieldValues, handleChange, emptyFieldValues];
+  return [fieldValues, handleChange, emptyFieldValues, setFieldValues];
 }
 
 export default useFieldValues;

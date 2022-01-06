@@ -35,10 +35,12 @@ const ACTION_TYPES = {
 };
 
 function reducer(reviewList, action) {
-  const { type, reviewIndex } = action;
+  const { type, reviewId } = action;
   switch (type) {
     case ACTION_TYPES.DELETE_REVIEW: {
-      return reviewList.filter((_, index) => index !== reviewIndex);
+      return reviewList.filter(
+        (deletingReview) => deletingReview.id !== reviewId,
+      );
     }
     default:
       return reviewList;
@@ -47,35 +49,48 @@ function reducer(reviewList, action) {
 
 function ReviewList() {
   const [reviewList, setReviewList] = useState(INITIAL_STATE);
-  const [showForm, setShowForm] = useState(false);
-  const [fieldValues, handleChange, emptyFieldValues] =
+  const [fieldValues, handleChange, emptyFieldValues, setFieldValues] =
     useFieldValues(INITIAL_VALUE);
+  const [showForm, setShowForm] = useState(false);
   const [reviewIconType, setReviewIconType] = useState(false);
 
-  // 새로운 리뷰 저장
+  // 새로운 리뷰 저장 + 기존 리뷰 수정
   const appendReview = () => {
     // review는 데이터베이스에 저장하면 id를 할당해줍니다.
     // 지금은 random한 숫자 적용
-    const reviewId = new Date().getTime();
+    const { id: reviewId } = fieldValues;
 
-    const review = { ...fieldValues, id: reviewId };
-    setReviewList((prevReviewList) => [...prevReviewList, review]);
+    if (!reviewId) {
+      const reviewId = new Date().getTime();
+      const review = { ...fieldValues, id: reviewId };
+      setReviewList((prevReviewList) => [...prevReviewList, review]);
+    } else
+      setReviewList((prevReviewList) => {
+        return prevReviewList.map((review) => {
+          if (review.id === reviewId) {
+            return { ...fieldValues };
+          } else {
+            return review;
+          }
+        });
+      });
     setShowForm((prevState) => !prevState);
     emptyFieldValues();
+  };
+
+  const willEditReview = (editingReview) => {
+    console.log('willEditReview :', editingReview);
+    setFieldValues(editingReview);
+    setShowForm(true);
   };
 
   const iconChange = () => {
     setReviewIconType((prevState) => !prevState);
   };
 
-  const deleteReview = (index) => {
-    const action = { type: ACTION_TYPES.DELETE_REVIEW, reviewIndex: index };
+  const deleteReview = (review) => {
+    const action = { type: ACTION_TYPES.DELETE_REVIEW, reviewId: review.id };
     setReviewList((prevReviewList) => reducer(prevReviewList, action));
-  };
-
-  const editReview = ({ fieldValues: fieldValue, index: reviewIndex }) => {
-    console.log(fieldValue);
-    console.log(reviewIndex);
   };
 
   return (
@@ -83,7 +98,11 @@ function ReviewList() {
       <h2 className="text-xl border-b-2 border-orange-400">Review List</h2>
 
       {showForm && (
-        <ReviewForm handleSubmit={appendReview} handleChange={handleChange} />
+        <ReviewForm
+          handleSubmit={appendReview}
+          handleChange={handleChange}
+          fieldValues={fieldValues}
+        />
       )}
       {!showForm && (
         <div className="grid grid-cols-3 gap-4 content-center">
@@ -117,16 +136,13 @@ function ReviewList() {
         </div>
       )}
 
-      {reviewList.map((review, index) => (
+      {reviewList.map((review) => (
         <Review
           key={review.id}
           review={review}
           type={reviewIconType}
-          handleDelete={() => deleteReview(index)}
-          handleChange={handleChange}
-          fieldValues={fieldValues}
-          editReview={editReview}
-          index={index}
+          handleDelete={() => deleteReview(review)}
+          handleEdit={() => willEditReview(review)}
         />
       ))}
     </div>
