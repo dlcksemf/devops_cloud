@@ -58,20 +58,17 @@ function ReviewList() {
   const appendReview = () => {
     // review는 데이터베이스에 저장하면 id를 할당해줍니다.
     // 지금은 random한 숫자 적용
-    const { id: reviewId } = fieldValues;
+    let { id: reviewId } = fieldValues;
 
     if (!reviewId) {
-      const reviewId = new Date().getTime();
-      const review = { ...fieldValues, id: reviewId };
-      setReviewList((prevReviewList) => [...prevReviewList, review]);
+      reviewId = new Date().getTime();
+      const createdReview = { ...fieldValues, id: reviewId };
+      setReviewList((prevReviewList) => [...prevReviewList, createdReview]);
     } else
       setReviewList((prevReviewList) => {
+        const editedReview = { ...fieldValues };
         return prevReviewList.map((review) => {
-          if (review.id === reviewId) {
-            return { ...fieldValues };
-          } else {
-            return review;
-          }
+          return review.id === reviewId ? editedReview : review;
         });
       });
     setShowForm((prevState) => !prevState);
@@ -79,7 +76,6 @@ function ReviewList() {
   };
 
   const willEditReview = (editingReview) => {
-    console.log('willEditReview :', editingReview);
     setFieldValues(editingReview);
     setShowForm(true);
   };
@@ -94,7 +90,7 @@ function ReviewList() {
   };
 
   return (
-    <div className="w-[400px] m-auto">
+    <div>
       <h2 className="text-xl border-b-2 border-orange-400">Review List</h2>
 
       {showForm && (
