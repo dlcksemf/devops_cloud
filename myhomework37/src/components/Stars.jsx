@@ -6,7 +6,7 @@ function Stars({ rating, type }) {
       <ul className="flex justify-center">
         {range.map((number) => {
           return (
-            <li>
+            <li key={number}>
               {type ? (
                 <Heart filled={number < rating} />
               ) : (
